@@ -6,6 +6,7 @@ import { useState, useCallback, useEffect } from "react";
 import { motion } from "motion/react";
 import { Linkedin, Calendar, Globe, Wrench, Menu, X } from "lucide-react";
 import { Logo } from "@/components/Logo";
+import { openCalendlyPopup } from "@/lib/calendly";
 
 const LightRays = dynamic(
   () => import("@/components/LightRays.jsx").then((m) => m.default),
@@ -83,8 +84,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             </Link>
             <a
               href={CALENDLY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={openCalendlyPopup}
               className={navLinkClass}
             >
               Contacto
@@ -101,9 +101,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             {mobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
         </nav>
-        {/* Panel móvil: overlay + links apilados */}
+        {/* Panel móvil: overlay + links apilados — pointer-events-none cuando cerrado para no bloquear clics */}
         <div
-          className="fixed inset-0 z-10 md:hidden"
+          className={`fixed inset-0 z-10 md:hidden ${!mobileMenuOpen ? "pointer-events-none" : ""}`}
           aria-hidden={!mobileMenuOpen}
         >
           <div
@@ -134,9 +134,10 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               </Link>
               <a
                 href={CALENDLY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={closeMobileMenu}
+                onClick={(e) => {
+                  openCalendlyPopup(e);
+                  closeMobileMenu();
+                }}
                 className={`${navLinkClass} block py-3 text-base`}
               >
                 Contacto
@@ -175,8 +176,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             </a>
             <a
               href={CALENDLY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={openCalendlyPopup}
               className="text-zinc-400 transition-colors hover:text-white"
               aria-label="Reservar cita en Calendly"
             >
