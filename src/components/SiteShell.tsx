@@ -23,11 +23,12 @@ const navLinkClass =
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [menuMounted, setMenuMounted] = useState(false);
+  const [menuEverOpened, setMenuEverOpened] = useState(false);
   const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), []);
 
-  useEffect(() => {
-    setMenuMounted(true);
+  const openMobileMenu = useCallback(() => {
+    setMenuEverOpened(true);
+    setMobileMenuOpen(true);
   }, []);
 
   useEffect(() => {
@@ -98,7 +99,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           {/* Botón menú móvil */}
           <button
             type="button"
-            onClick={() => setMobileMenuOpen((o) => !o)}
+            onClick={() => (mobileMenuOpen ? closeMobileMenu() : openMobileMenu())}
             className="flex size-10 shrink-0 items-center justify-center rounded-full text-zinc-400 transition-colors hover:bg-white/10 hover:text-white md:hidden"
             aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={mobileMenuOpen}
@@ -106,8 +107,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             {mobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
         </nav>
-        {/* Menú móvil: bottom sheet estilo Apple — no renderizar hasta después del primer paint para evitar flash */}
-        {menuMounted && (
+        {/* Menú móvil: solo en DOM cuando el usuario ha abierto el menú al menos una vez (evita flash al cargar) */}
+        {menuEverOpened && (
         <div
           className={`fixed inset-0 z-10 md:hidden ${!mobileMenuOpen ? "pointer-events-none" : ""}`}
           aria-hidden={!mobileMenuOpen}
