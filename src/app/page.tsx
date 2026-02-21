@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { motion } from "motion/react";
 import { Linkedin, Calendar, Globe, Wrench } from "lucide-react";
-import { openCalendlyPopup } from "@/lib/calendly";
+import { openCalendlyPopup, preloadCalendly } from "@/lib/calendly";
 
 const StarBorder = dynamic(
   () => import("@/components/StarBorder.jsx").then((m) => m.default),
@@ -77,6 +77,7 @@ export default function HomePage() {
             as="a"
             href={CALENDLY_URL}
             onClick={openCalendlyPopup}
+            onMouseEnter={preloadCalendly}
             color="#d4d4d4"
             speed="8s"
             thickness={1}
@@ -106,6 +107,7 @@ export default function HomePage() {
               target={isCalendly ? undefined : "_blank"}
               rel="noopener noreferrer"
               onClick={isCalendly ? openCalendlyPopup : undefined}
+              onMouseEnter={isCalendly ? preloadCalendly : undefined}
               variants={fadeUp}
               transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="flex flex-col items-center gap-2 text-white/80 transition-colors hover:text-white"

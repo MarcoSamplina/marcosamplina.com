@@ -6,7 +6,7 @@ import { useState, useCallback, useEffect } from "react";
 import { motion } from "motion/react";
 import { Linkedin, Calendar, Globe, Wrench, Menu, X } from "lucide-react";
 import { Logo } from "@/components/Logo";
-import { openCalendlyPopup } from "@/lib/calendly";
+import { openCalendlyPopup, preloadCalendly } from "@/lib/calendly";
 
 const LightRays = dynamic(
   () => import("@/components/LightRays.jsx").then((m) => m.default),
@@ -91,6 +91,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             <a
               href={CALENDLY_URL}
               onClick={openCalendlyPopup}
+              onMouseEnter={preloadCalendly}
               className={navLinkClass}
             >
               Contacto
@@ -156,6 +157,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                     openCalendlyPopup(e);
                     closeMobileMenu();
                   }}
+                  onMouseEnter={preloadCalendly}
                   className="nav-link-shiny block px-4 py-3.5 text-left text-base font-medium text-zinc-300 hover:bg-white/5 hover:text-white"
                 >
                   Contacto
@@ -197,6 +199,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             <a
               href={CALENDLY_URL}
               onClick={openCalendlyPopup}
+              onMouseEnter={preloadCalendly}
               className="text-zinc-400 transition-colors hover:text-white"
               aria-label="Reservar cita en Calendly"
             >

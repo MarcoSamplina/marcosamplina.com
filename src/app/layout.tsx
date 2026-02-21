@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SiteShell } from "@/components/SiteShell";
 import "./globals.css";
@@ -92,7 +91,8 @@ export default function RootLayout({
     <html lang="es" className="dark" suppressHydrationWarning>
       <head>
         <meta name="google-site-verification" content="_-7kJm0ua9w444U_MniD8OpVL4uihggvedMinoT7vKU" />
-        <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+        <link rel="preconnect" href="https://assets.calendly.com" />
+        <link rel="dns-prefetch" href="https://assets.calendly.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -103,10 +103,6 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <SiteShell>{children}</SiteShell>
-        <Script
-          src="https://assets.calendly.com/assets/external/widget.js"
-          strategy="afterInteractive"
-        />
       </body>
     </html>
   );
