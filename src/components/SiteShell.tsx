@@ -101,49 +101,61 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             {mobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
         </nav>
-        {/* Panel móvil: overlay + links apilados — pointer-events-none cuando cerrado para no bloquear clics */}
+        {/* Menú móvil: bottom sheet estilo Apple — pointer-events-none cuando cerrado */}
         <div
           className={`fixed inset-0 z-10 md:hidden ${!mobileMenuOpen ? "pointer-events-none" : ""}`}
           aria-hidden={!mobileMenuOpen}
         >
-          <div
-            className={`absolute inset-0 bg-zinc-950/80 backdrop-blur-sm transition-opacity duration-200 ${mobileMenuOpen ? "opacity-100" : "pointer-events-none opacity-0"}`}
+          <motion.div
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
             onClick={closeMobileMenu}
+            initial={false}
+            animate={{ opacity: mobileMenuOpen ? 1 : 0 }}
+            transition={{ duration: 0.25 }}
           />
-          <div
-            className={`absolute right-0 top-0 flex h-full w-full max-w-xs flex-col border-l border-white/10 bg-zinc-950/95 px-6 pt-20 shadow-xl backdrop-blur-md transition-transform duration-200 ease-out md:hidden ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"}`}
+          <motion.div
+            className="absolute bottom-0 left-0 right-0 z-20 flex flex-col rounded-t-2xl border-t border-white/10 bg-zinc-900/95 shadow-[0_-8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl md:hidden"
+            initial={false}
+            animate={{ y: mobileMenuOpen ? 0 : "100%" }}
+            transition={{ type: "spring", damping: 28, stiffness: 300 }}
           >
-            <div className="flex flex-col gap-1">
-              <Link
-                href={TOOLS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={closeMobileMenu}
-                className={`${navLinkClass} block py-3 text-base`}
-              >
-                Herramientas
-              </Link>
-              <Link
-                href={FRAMER_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={closeMobileMenu}
-                className={`${navLinkClass} block py-3 text-base`}
-              >
-                Portafolio
-              </Link>
-              <a
-                href={CALENDLY_URL}
-                onClick={(e) => {
-                  openCalendlyPopup(e);
-                  closeMobileMenu();
-                }}
-                className={`${navLinkClass} block py-3 text-base`}
-              >
-                Contacto
-              </a>
+            {/* Handle tipo iOS */}
+            <div className="flex justify-center pt-3 pb-1">
+              <span className="h-1 w-10 rounded-full bg-white/30" aria-hidden />
             </div>
-          </div>
+            <nav className="px-4 pb-8 pt-2" aria-label="Menú principal">
+              <div className="overflow-hidden rounded-xl bg-white/5">
+                <Link
+                  href={TOOLS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={closeMobileMenu}
+                  className="nav-link-shiny block border-b border-white/10 px-4 py-3.5 text-left text-base font-medium text-zinc-300 first:rounded-t-xl hover:bg-white/5 hover:text-white"
+                >
+                  Herramientas
+                </Link>
+                <Link
+                  href={FRAMER_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={closeMobileMenu}
+                  className="nav-link-shiny block border-b border-white/10 px-4 py-3.5 text-left text-base font-medium text-zinc-300 hover:bg-white/5 hover:text-white"
+                >
+                  Portafolio
+                </Link>
+                <a
+                  href={CALENDLY_URL}
+                  onClick={(e) => {
+                    openCalendlyPopup(e);
+                    closeMobileMenu();
+                  }}
+                  className="nav-link-shiny block px-4 py-3.5 text-left text-base font-medium text-zinc-300 hover:bg-white/5 hover:text-white"
+                >
+                  Contacto
+                </a>
+              </div>
+            </nav>
+          </motion.div>
         </div>
       </motion.header>
 
