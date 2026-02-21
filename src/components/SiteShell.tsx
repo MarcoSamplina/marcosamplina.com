@@ -23,7 +23,12 @@ const navLinkClass =
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [menuMounted, setMenuMounted] = useState(false);
   const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), []);
+
+  useEffect(() => {
+    setMenuMounted(true);
+  }, []);
 
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -101,7 +106,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             {mobileMenuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
         </nav>
-        {/* Menú móvil: bottom sheet estilo Apple — pointer-events-none cuando cerrado */}
+        {/* Menú móvil: bottom sheet estilo Apple — no renderizar hasta después del primer paint para evitar flash */}
+        {menuMounted && (
         <div
           className={`fixed inset-0 z-10 md:hidden ${!mobileMenuOpen ? "pointer-events-none" : ""}`}
           aria-hidden={!mobileMenuOpen}
@@ -109,13 +115,13 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           <motion.div
             className="absolute inset-0 bg-black/50 backdrop-blur-sm"
             onClick={closeMobileMenu}
-            initial={false}
+            initial={{ opacity: 0 }}
             animate={{ opacity: mobileMenuOpen ? 1 : 0 }}
             transition={{ duration: 0.25 }}
           />
           <motion.div
             className="absolute bottom-0 left-0 right-0 z-20 flex flex-col rounded-t-2xl border-t border-white/10 bg-zinc-900/95 shadow-[0_-8px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl md:hidden"
-            initial={false}
+            initial={{ y: "100%" }}
             animate={{ y: mobileMenuOpen ? 0 : "100%" }}
             transition={{ type: "spring", damping: 28, stiffness: 300 }}
           >
@@ -157,6 +163,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             </nav>
           </motion.div>
         </div>
+        )}
       </motion.header>
 
       {/* Contenido */}
