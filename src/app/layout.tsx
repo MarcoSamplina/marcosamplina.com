@@ -19,6 +19,9 @@ const OG_IMAGE =
 export const metadata: Metadata = {
   metadataBase: new URL("https://marcosamplina.com"),
   title: "Growth Marketing Specialist | Marco Samplina",
+  icons: {
+    icon: "/favicon.ico",
+  },
   description:
     "Growth Marketing Specialist. SEO, SEM, automatización y estrategia digital. Herramientas gratis, guías y reserva de sesión.",
   keywords: [
