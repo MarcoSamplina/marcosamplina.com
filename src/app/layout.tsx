@@ -18,11 +18,14 @@ const geistMono = Geist_Mono({
 const OG_IMAGE =
   "https://hpgodeemiqtbixwnzzvd.supabase.co/storage/v1/object/public/media/general/1771649629909-Screenshot%202026-02-21%20at%2005.53.24.webp";
 
+const SITE_URL = "https://marcosamplina.com";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://marcosamplina.com"),
+  metadataBase: new URL(SITE_URL),
   title: "Growth Marketing Specialist | Marco Samplina",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/icon",
+    shortcut: "/icon",
   },
   description:
     "Growth Marketing Specialist. SEO, SEM, automatización y estrategia digital. Herramientas gratis, guías y reserva de sesión.",
@@ -94,6 +97,8 @@ export default function RootLayout({
     <html lang="es" className="dark" suppressHydrationWarning>
       <head>
         <meta name="google-site-verification" content="_-7kJm0ua9w444U_MniD8OpVL4uihggvedMinoT7vKU" />
+        <link rel="icon" href={`${SITE_URL}/icon`} type="image/png" sizes="48x48" />
+        <link rel="shortcut icon" href={`${SITE_URL}/icon`} type="image/png" />
         <link rel="preconnect" href="https://assets.calendly.com" />
         <link rel="dns-prefetch" href="https://assets.calendly.com" />
         <script

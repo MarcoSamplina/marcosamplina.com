@@ -7,6 +7,8 @@ published: true
 metaTitle: "SEO en 2026: en qué fijarse ahora de verdad"
 metaDescription: "Descubre cómo ha cambiado el SEO en 2026 y dónde poner el foco: IA, AI Overviews, citas, entidad y autoridad, más allá de las tácticas clásicas."
 cta: true
+image: "https://hpgodeemiqtbixwnzzvd.supabase.co/storage/v1/object/public/media/general/1771974398994-seo_2026.webp"
+imageAlt: "Diagrama conceptual: evolución del SEO hacia 2026, de posiciones a ser citado como fuente por la IA."
 faqs:
   - question: "¿Qué es el SEO en 2026 y en qué se diferencia del de antes?"
     answer: "En 2026 el SEO ya no se centra solo en keywords, enlaces y on-page clásico. El foco pasa a ser ser citado como fuente por motores con IA (Google AI Overviews, buscadores generativos), construir entidad y autoridad real (E-E-A-T) y optimizar el contenido para que sea fácilmente extraíble por los modelos: respuestas claras, datos, casos y estructura."
@@ -25,6 +27,8 @@ faqs:
 Si sigues pensando el SEO como en 2018 —keywords, enlaces y optimización on-page— te estás quedando fuera del juego. El SEO en 2026 ya no va solo de posiciones: va de ser la fuente que los motores con IA eligen para construir sus respuestas. En este artículo verás qué ha cambiado de verdad, por qué importa más ser citado que rankear arriba y cómo estructurar contenido y estrategia para este nuevo escenario.
 
 En 2026, hacer SEO significa optimizar para que la IA te cite.
+
+![Diagrama conceptual: evolución del SEO hacia 2026, de posiciones a ser citado como fuente por la IA.](https://hpgodeemiqtbixwnzzvd.supabase.co/storage/v1/object/public/media/general/1771974398994-seo_2026.webp)
 
 ## Qué ha cambiado realmente en el SEO en 2026
 

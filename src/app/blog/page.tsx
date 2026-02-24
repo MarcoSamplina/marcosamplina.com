@@ -33,32 +33,45 @@ export default function BlogPage() {
               <li key={post.slug}>
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="group flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-6 transition-colors hover:border-white/20 hover:bg-white/[0.07]"
+                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] transition-colors hover:border-white/20 hover:bg-white/[0.07]"
                 >
-                  {post.date && (
-                    <time
-                      dateTime={post.date}
-                      className="mb-2 block text-zinc-500 text-xs uppercase tracking-wider"
-                    >
-                      {new Date(post.date).toLocaleDateString("es-ES", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </time>
+                  {post.image && (
+                    <span className="block aspect-video w-full overflow-hidden bg-white/5">
+                      <img
+                        src={post.image}
+                        alt={post.imageAlt ?? post.title}
+                        width={800}
+                        height={450}
+                        className="h-full w-full object-cover transition-transform group-hover:scale-[1.02]"
+                      />
+                    </span>
                   )}
-                  <h2 className="mb-3 font-semibold text-white group-hover:text-white/95">
-                    {post.title}
-                  </h2>
-                  {post.description && (
-                    <p className="mt-auto text-zinc-400 text-sm leading-relaxed line-clamp-3">
-                      {post.description}
-                    </p>
-                  )}
-                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-white/80 group-hover:text-white">
-                    Leer artículo
-                    <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
-                  </span>
+                  <div className="flex flex-1 flex-col p-6">
+                    {post.date && (
+                      <time
+                        dateTime={post.date}
+                        className="mb-2 block text-zinc-500 text-xs uppercase tracking-wider"
+                      >
+                        {new Date(post.date).toLocaleDateString("es-ES", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                      </time>
+                    )}
+                    <h2 className="mb-3 font-semibold text-white group-hover:text-white/95">
+                      {post.title}
+                    </h2>
+                    {post.description && (
+                      <p className="mt-auto text-zinc-400 text-sm leading-relaxed line-clamp-3">
+                        {post.description}
+                      </p>
+                    )}
+                    <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-white/80 group-hover:text-white">
+                      Leer artículo
+                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
+                    </span>
+                  </div>
                 </Link>
               </li>
             ))}

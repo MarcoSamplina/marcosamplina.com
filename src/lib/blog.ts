@@ -21,6 +21,12 @@ export interface BlogPost {
   metaDescription?: string;
   faqs?: BlogPostFAQ[];
   cta?: boolean;
+  /** URL de la imagen de portada (para schema y listado) */
+  image?: string;
+  /** Alt text de la imagen de portada */
+  imageAlt?: string;
+  /** Fecha de última actualización (para mostrar "Actualizado el...") */
+  dateModified?: string;
 }
 
 function getSlugFromFilename(filename: string): string {
@@ -43,6 +49,9 @@ export function getPosts(): Omit<BlogPost, "content">[] {
         description: data.description ?? "",
         author: data.author ?? "",
         published: data.published !== false,
+        image: typeof data.image === "string" ? data.image : undefined,
+        imageAlt: typeof data.imageAlt === "string" ? data.imageAlt : undefined,
+        dateModified: typeof data.dateModified === "string" ? data.dateModified : undefined,
       };
     })
     .filter(Boolean) as Omit<BlogPost, "content">[];
@@ -74,7 +83,16 @@ export function getPostBySlug(slug: string): BlogPost | null {
     metaDescription: typeof data.metaDescription === "string" ? data.metaDescription : undefined,
     faqs: faqs?.length ? faqs : undefined,
     cta: data.cta === true,
+    image: typeof data.image === "string" ? data.image : undefined,
+    imageAlt: typeof data.imageAlt === "string" ? data.imageAlt : undefined,
+    dateModified: typeof data.dateModified === "string" ? data.dateModified : undefined,
   };
+}
+
+/** Posts relacionados (excluye el actual, por fecha, límite N) */
+export function getRelatedPosts(currentSlug: string, limit = 3): Omit<BlogPost, "content">[] {
+  const posts = getPosts().filter((p) => p.slug !== currentSlug);
+  return posts.slice(0, limit);
 }
 
 export function getAllSlugs(): string[] {

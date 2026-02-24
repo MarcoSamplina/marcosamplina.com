@@ -279,9 +279,9 @@ export default function HomePage() {
           </motion.h2>
           <motion.p
             variants={fadeUp}
-            className="mb-12 text-center text-zinc-400 text-sm sm:text-base"
+            className="mb-12 text-center text-zinc-400 text-sm sm:text-base max-w-xl mx-auto"
           >
-            Objetivos claros, plan de acción y ejecución medible.
+            Objetivos claros, plan de acción y ejecución medible. Así conectamos tu situación actual con los resultados que buscas, sin pasos de más.
           </motion.p>
           <motion.div variants={fadeUp}>
             <AnimatedBeamSection />
@@ -316,7 +316,8 @@ export default function HomePage() {
                 con métricas claras y sin humo.
               </p>
               <p className="text-zinc-400 text-sm leading-relaxed">
-                He trabajado con startups, pymes y proyectos propios. Si quieres revisar dónde estás y
+                He trabajado con startups, pymes y proyectos propios. Mi enfoque es práctico: definir
+                qué mueve la aguja en tu caso, priorizar y ejecutar. Si quieres revisar dónde estás y
                 hacia dónde quieres ir con tu marketing, podemos hacerlo en una sesión sin compromiso.
               </p>
             </div>

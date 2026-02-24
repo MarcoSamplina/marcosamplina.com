@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 
 export interface AnimatedBeamProps {
   className?: string
-  containerRef: RefObject<HTMLElement | null> // Container ref
+  containerRef: RefObject<HTMLElement | null>
   fromRef: RefObject<HTMLElement | null>
   toRef: RefObject<HTMLElement | null>
   curvature?: number
@@ -23,6 +23,10 @@ export interface AnimatedBeamProps {
   startYOffset?: number
   endXOffset?: number
   endYOffset?: number
+  /** Cuando true, la línea se dibuja (pathLength 0→1) al entrar en vista */
+  visible?: boolean
+  /** Duración en segundos del efecto de dibujado */
+  drawDuration?: number
 }
 
 export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
@@ -31,7 +35,7 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
   fromRef,
   toRef,
   curvature = 0,
-  reverse = false, // Include the reverse prop
+  reverse = false,
   duration = Math.random() * 3 + 4,
   delay = 0,
   pathColor = "gray",
@@ -43,6 +47,8 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
   startYOffset = 0,
   endXOffset = 0,
   endYOffset = 0,
+  visible = true,
+  drawDuration = 0,
 }) => {
   const id = useId()
   const [pathD, setPathD] = useState("")
@@ -119,6 +125,8 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
     endYOffset,
   ])
 
+  const drawEase = [0.22, 1, 0.36, 1] as const;
+
   return (
     <svg
       fill="none"
@@ -131,6 +139,7 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
       )}
       viewBox={`0 0 ${svgDimensions.width} ${svgDimensions.height}`}
     >
+      {/* Fondo estático de la línea */}
       <path
         d={pathD}
         stroke={pathColor}
@@ -138,13 +147,31 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
         strokeOpacity={pathOpacity}
         strokeLinecap="round"
       />
-      <path
-        d={pathD}
-        strokeWidth={pathWidth}
-        stroke={`url(#${id})`}
-        strokeOpacity="1"
-        strokeLinecap="round"
-      />
+      {/* Línea con gradiente: dibujado suave (pathLength) + animación de gradiente */}
+      {drawDuration > 0 ? (
+        <motion.path
+          d={pathD}
+          strokeWidth={pathWidth}
+          stroke={`url(#${id})`}
+          strokeOpacity="1"
+          strokeLinecap="round"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: visible ? 1 : 0 }}
+          transition={{
+            duration: drawDuration,
+            ease: drawEase,
+            delay: visible ? 0.15 : 0,
+          }}
+        />
+      ) : (
+        <path
+          d={pathD}
+          strokeWidth={pathWidth}
+          stroke={`url(#${id})`}
+          strokeOpacity="1"
+          strokeLinecap="round"
+        />
+      )}
       <defs>
         <motion.linearGradient
           className="transform-gpu"
