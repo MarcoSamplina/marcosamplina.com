@@ -4,6 +4,15 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 import { motion } from "motion/react";
 import { Linkedin, Calendar, Globe, Wrench, Search, Megaphone, Zap, Target, ChevronDown } from "lucide-react";
+import { Spotlight } from "@/components/ui/spotlight";
+
+const AnimatedBeamSection = dynamic(
+  () => import("@/components/AnimatedBeamSection").then((m) => m.AnimatedBeamSection),
+  {
+    ssr: false,
+    loading: () => <div className="min-h-[280px] w-full" aria-hidden />,
+  }
+);
 import { openCalendlyPopup, preloadCalendly } from "@/lib/calendly";
 
 const StarBorder = dynamic(
@@ -87,14 +96,15 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Hero: ocupa todo el viewport; la siguiente sección solo se ve al hacer scroll */}
+      {/* Hero: viewport completo + Spotlight; siguiente sección al hacer scroll */}
       <motion.section
-        className="relative z-10 flex min-h-[calc(100dvh-6rem)] flex-col items-center justify-center px-6 py-12 text-center"
+        className="relative z-10 flex min-h-[calc(100dvh-6rem)] flex-col items-center justify-center overflow-hidden px-6 py-12 text-center"
         aria-label="Presentación principal"
         variants={container}
         initial="hidden"
         animate="show"
       >
+        <Spotlight className="-top-40 left-0 md:left-2/3" fill="rgba(255,255,255,0.07)" />
         {/* Badge */}
         <motion.p
           variants={fadeUp}
@@ -172,11 +182,26 @@ export default function HomePage() {
           );
           })}
         </motion.div>
+        {/* Indicador de scroll */}
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-zinc-500"
+          initial={{ opacity: 0, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.2, duration: 0.5 }}
+        >
+          <span className="text-[10px] uppercase tracking-widest">Scroll</span>
+          <motion.div
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <ChevronDown className="size-4" aria-hidden />
+          </motion.div>
+        </motion.div>
       </motion.section>
 
-      {/* Servicios — grid uniforme; SEO: section + h2 + h3 + p */}
+      {/* Servicios — grid uniforme; content-visibility para Core Web Vitals */}
       <motion.section
-        className="relative z-10 px-6 py-16 sm:py-20"
+        className="relative z-10 px-6 py-16 sm:py-20 [content-visibility:auto] [contain-intrinsic-size:auto_600px]"
         aria-label="Servicios de marketing digital"
         initial="hidden"
         whileInView="show"
@@ -208,9 +233,37 @@ export default function HomePage() {
         </div>
       </motion.section>
 
-      {/* Experiencia — trayectoria (sin tono de venta); tarjeta bento para coherencia */}
+      {/* Flujo con Animated Beam — lazy loaded; content-visibility para CWV */}
       <motion.section
-        className="relative z-10 px-6 py-16 sm:py-20"
+        className="relative z-10 px-6 py-16 sm:py-20 [content-visibility:auto] [contain-intrinsic-size:auto_400px]"
+        aria-label="Flujo de trabajo"
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-80px" }}
+        variants={container}
+      >
+        <div className="mx-auto max-w-4xl">
+          <motion.h2
+            variants={fadeUp}
+            className="mb-4 text-center text-2xl font-semibold text-white sm:text-3xl"
+          >
+            De la estrategia al resultado
+          </motion.h2>
+          <motion.p
+            variants={fadeUp}
+            className="mb-12 text-center text-zinc-400 text-sm sm:text-base"
+          >
+            Objetivos claros, plan de acción y ejecución medible.
+          </motion.p>
+          <motion.div variants={fadeUp}>
+            <AnimatedBeamSection />
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* Experiencia — content-visibility para CWV */}
+      <motion.section
+        className="relative z-10 px-6 py-16 sm:py-20 [content-visibility:auto] [contain-intrinsic-size:auto_400px]"
         aria-label="Experiencia profesional"
         initial="hidden"
         whileInView="show"
@@ -243,9 +296,9 @@ export default function HomePage() {
         </div>
       </motion.section>
 
-      {/* FAQ — Schema.org FAQPage para rich results en buscadores */}
+      {/* FAQ — content-visibility para CWV */}
       <motion.section
-        className="relative z-10 px-6 py-16 sm:py-20"
+        className="relative z-10 px-6 py-16 sm:py-20 [content-visibility:auto] [contain-intrinsic-size:auto_500px]"
         aria-label="Preguntas frecuentes"
         initial="hidden"
         whileInView="show"

@@ -5,35 +5,51 @@ import type { TimelineEntry } from "@/components/ui/timeline";
 
 const TIMELINE_DATA: TimelineEntry[] = [
   {
-    title: "Formación",
+    title: "2018-2021 · Universidad Peruana de Ciencias Aplicadas",
     content: (
       <div>
         <p className="text-zinc-300 text-sm md:text-base leading-relaxed">
-          Estudios en [área]. Formación continua en marketing digital, SEO y growth.
+          <strong className="text-white">Bachiller en Marketing</strong> con mención en Data Science. Business, análisis de datos y fundamentos de marketing.
         </p>
       </div>
     ),
   },
   {
-    title: "Primeros años",
+    title: "2018-2023 · Isopetrol Lubricants",
     content: (
       <div>
-        <p className="text-zinc-300 text-sm md:text-base leading-relaxed mb-4">
-          Inicios en [sector/empresa]. Enfoque en [SEO / paid / estrategia].
-        </p>
-        <p className="text-zinc-400 text-sm leading-relaxed">
-          Aquí puedes detallar proyectos, logros o aprendizajes clave.
+        <p className="text-zinc-300 text-sm md:text-base leading-relaxed mb-2">
+          <strong className="text-white">Asistente de marketing</strong> (prácticas, 2018-2019) y después <strong className="text-white">Analista de marketing</strong> (2019-2023). Lima, Perú. Análisis de mercados, planificación y ejecución.
         </p>
       </div>
     ),
   },
   {
-    title: "Hoy",
+    title: "2023-2024 · Universidad Europea",
     content: (
       <div>
         <p className="text-zinc-300 text-sm md:text-base leading-relaxed">
-          Growth Marketing Specialist. Consultoría, sesiones 1:1 y desarrollo de herramientas
-          (como esta web y tools.marcosamplina.com). Me gusta unir estrategia, datos y ejecución.
+          <strong className="text-white">Máster en Marketing Digital y Big Data.</strong> SEO, Google Ads y análisis de datos aplicados al marketing.
+        </p>
+      </div>
+    ),
+  },
+  {
+    title: "2024-2026 · Worksible",
+    content: (
+      <div>
+        <p className="text-zinc-300 text-sm md:text-base leading-relaxed">
+          <strong className="text-white">Growth Marketing & Paid media specialist.</strong> Valencia, híbrido. Programa Lanzadera. n8n, Notion, campañas de pago y automatización.
+        </p>
+      </div>
+    ),
+  },
+  {
+    title: "2026-actualidad · UNANIME",
+    content: (
+      <div>
+        <p className="text-zinc-300 text-sm md:text-base leading-relaxed">
+          <strong className="text-white">SEO Specialist.</strong> Valencia. Búsqueda orgánica, optimización y visibilidad en buscadores.
         </p>
       </div>
     ),
@@ -48,7 +64,7 @@ export default function SobreMiPage() {
           Sobre mí
         </h1>
         <p className="mb-12 max-w-2xl text-zinc-400 text-sm md:text-base leading-relaxed">
-          Trayectoria, estudios y qué hago ahora. Puedes editar cada bloque de la timeline más abajo.
+          De Perú a Valencia: formación en marketing y data, experiencia en agencia, industria y startups, y ahora enfocado en SEO y growth.
         </p>
       </div>
       <div className="relative w-full overflow-clip">

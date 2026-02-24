@@ -31,6 +31,20 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     setMobileMenuOpen(true);
   }, []);
 
+  const [deferBackground, setDeferBackground] = useState(false);
+  useEffect(() => {
+    let cancelled = false;
+    const id = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (!cancelled) setDeferBackground(true);
+      });
+    });
+    return () => {
+      cancelled = true;
+      cancelAnimationFrame(id);
+    };
+  }, []);
+
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -44,9 +58,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="relative flex min-h-dvh flex-col overflow-hidden bg-zinc-950">
-      {/* Fondo full-bleed: LightRays + overlay (desde arriba, detrás de nav y todo) */}
+      {/* Fondo: LightRays tras primer paint para no competir con LCP (Core Web Vitals) */}
       <div className="pointer-events-none fixed inset-0 z-0" aria-hidden>
-        <LightRays
+        {deferBackground && <LightRays
           raysOrigin="top-center"
           raysColor="#e8e8e8"
           raysSpeed={0.8}
@@ -57,7 +71,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           followMouse={true}
           mouseInfluence={0.12}
           className="absolute inset-0 h-full w-full"
-        />
+        />}
         <div className="absolute inset-0 bg-zinc-950/70" aria-hidden />
       </div>
 
@@ -72,6 +86,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           <Logo href="/" />
           {/* Links visibles solo desde md */}
           <div className="hidden items-center gap-4 md:flex md:gap-6">
+            <Link href="/sobre-mi" className={navLinkClass}>
+              Sobre mí
+            </Link>
             <Link
               href={TOOLS_URL}
               target="_blank"
@@ -88,8 +105,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             >
               Portafolio
             </Link>
-            <Link href="/sobre-mi" className={navLinkClass}>
-              Sobre mí
+            <Link href="/blog" className={navLinkClass}>
+              Blog
             </Link>
             <a
               href={CALENDLY_URL}
@@ -137,11 +154,18 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             <nav className="px-4 pb-8 pt-2" aria-label="Menú principal">
               <div className="overflow-hidden rounded-xl bg-white/5">
                 <Link
+                  href="/sobre-mi"
+                  onClick={closeMobileMenu}
+                  className="nav-link-shiny block border-b border-white/10 px-4 py-3.5 text-left text-base font-medium text-zinc-300 first:rounded-t-xl hover:bg-white/5 hover:text-white"
+                >
+                  Sobre mí
+                </Link>
+                <Link
                   href={TOOLS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={closeMobileMenu}
-                  className="nav-link-shiny block border-b border-white/10 px-4 py-3.5 text-left text-base font-medium text-zinc-300 first:rounded-t-xl hover:bg-white/5 hover:text-white"
+                  className="nav-link-shiny block border-b border-white/10 px-4 py-3.5 text-left text-base font-medium text-zinc-300 hover:bg-white/5 hover:text-white"
                 >
                   Herramientas
                 </Link>
@@ -155,11 +179,11 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                   Portafolio
                 </Link>
                 <Link
-                  href="/sobre-mi"
+                  href="/blog"
                   onClick={closeMobileMenu}
                   className="nav-link-shiny block border-b border-white/10 px-4 py-3.5 text-left text-base font-medium text-zinc-300 hover:bg-white/5 hover:text-white"
                 >
-                  Sobre mí
+                  Blog
                 </Link>
                 <a
                   href={CALENDLY_URL}
