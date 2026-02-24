@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { motion } from "motion/react";
-import { Linkedin, Calendar, Globe, Wrench } from "lucide-react";
+import { Linkedin, Calendar, Globe, Wrench, Search, Megaphone, Zap, Target } from "lucide-react";
 import { openCalendlyPopup, preloadCalendly } from "@/lib/calendly";
 
 const StarBorder = dynamic(
@@ -34,6 +34,29 @@ const container = {
     transition: { staggerChildren: 0.12, delayChildren: 0.15 },
   },
 };
+
+const SERVICIOS = [
+  {
+    icon: Search,
+    title: "SEO",
+    description: "Posicionamiento orgánico y visibilidad en buscadores para que te encuentren cuando buscan.",
+  },
+  {
+    icon: Megaphone,
+    title: "SEM y paid",
+    description: "Campañas en Google, Meta y LinkedIn para captar tráfico y leads de forma medible.",
+  },
+  {
+    icon: Zap,
+    title: "Automatización",
+    description: "Flujos, emails y procesos que ahorran tiempo y escalan sin multiplicar el esfuerzo.",
+  },
+  {
+    icon: Target,
+    title: "Estrategia",
+    description: "Objetivos claros, métricas y un plan que conecta marketing con resultados de negocio.",
+  },
+];
 
 export default function HomePage() {
   return (
@@ -123,6 +146,70 @@ export default function HomePage() {
           );
           })}
         </motion.div>
+      </motion.section>
+
+      {/* Servicios — qué hago */}
+      <motion.section
+        className="relative z-10 px-6 py-16 sm:py-20"
+        aria-label="Servicios"
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-80px" }}
+        variants={container}
+      >
+        <div className="mx-auto max-w-4xl">
+          <motion.h2
+            variants={fadeUp}
+            className="mb-12 text-center text-2xl font-semibold text-white sm:text-3xl"
+          >
+            Qué hago
+          </motion.h2>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {SERVICIOS.map(({ icon: Icon, title, description }) => (
+              <motion.div
+                key={title}
+                variants={fadeUp}
+                className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-colors hover:bg-white/[0.07]"
+              >
+                <span className="mb-4 flex size-11 items-center justify-center rounded-xl border border-white/20 bg-white/5 text-white">
+                  <Icon className="size-5" />
+                </span>
+                <h3 className="mb-2 font-semibold text-white">{title}</h3>
+                <p className="text-sm leading-relaxed text-zinc-400">{description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Experiencia — trayectoria y forma de trabajar (sin tono de venta) */}
+      <motion.section
+        className="relative z-10 px-6 py-16 sm:py-20"
+        aria-label="Experiencia"
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-80px" }}
+        variants={container}
+      >
+        <div className="mx-auto max-w-2xl">
+          <motion.h2
+            variants={fadeUp}
+            className="mb-10 text-center text-2xl font-semibold text-white sm:text-3xl"
+          >
+            Mi experiencia
+          </motion.h2>
+          <motion.div variants={fadeUp} className="space-y-6 text-center">
+            <p className="text-zinc-300 leading-relaxed">
+              Llevo años ayudando a negocios y equipos a crecer con marketing digital: desde SEO y
+              campañas de pago hasta automatización y estrategia. Me gusta bajar las cosas a tierra,
+              con métricas claras y sin humo.
+            </p>
+            <p className="text-zinc-400 text-sm leading-relaxed">
+              He trabajado con startups, pymes y proyectos propios. Si quieres revisar dónde estás y
+              hacia dónde quieres ir con tu marketing, podemos hacerlo en una sesión sin compromiso.
+            </p>
+          </motion.div>
+        </div>
       </motion.section>
     </>
   );
