@@ -3,6 +3,8 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import { getPostBySlug, getAllSlugs } from "@/lib/blog";
 import { BlogPostCta } from "@/components/BlogPostCta";
+import { BlogPostFaq } from "@/components/BlogPostFaq";
+import { BlogPostVisualBreak } from "@/components/BlogPostVisualBreak";
 
 const SITE_URL = "https://marcosamplina.com";
 
@@ -111,23 +113,10 @@ export default async function BlogPostPage({ params }: PageProps) {
             <ReactMarkdown>{post.content}</ReactMarkdown>
           </div>
 
+          <BlogPostVisualBreak />
+
           {post.faqs && post.faqs.length > 0 && (
-            <section className="mt-14" aria-label="Preguntas frecuentes">
-              <h2 className="mb-6 text-xl font-semibold text-white">
-                Preguntas frecuentes sobre SEO en 2026
-              </h2>
-              <dl className="space-y-4">
-                {post.faqs.map((faq) => (
-                  <div
-                    key={faq.question}
-                    className="rounded-xl border border-white/10 bg-white/[0.04] p-5"
-                  >
-                    <dt className="mb-2 font-medium text-white">{faq.question}</dt>
-                    <dd className="text-zinc-400 text-sm leading-relaxed">{faq.answer}</dd>
-                  </div>
-                ))}
-              </dl>
-            </section>
+            <BlogPostFaq faqs={post.faqs} />
           )}
 
           {post.cta && <BlogPostCta />}

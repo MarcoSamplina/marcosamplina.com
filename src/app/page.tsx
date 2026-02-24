@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useState } from "react";
-import { motion } from "motion/react";
+import { motion, useReducedMotion, MotionConfig } from "motion/react";
 import { Linkedin, Calendar, Globe, Wrench, Search, Megaphone, Zap, Target, ChevronDown } from "lucide-react";
 import { Spotlight } from "@/components/ui/spotlight";
 
@@ -32,39 +32,26 @@ const HERO_LINKS = [
   { href: TOOLS_URL, label: "Tools", icon: Wrench },
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 },
-};
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.15 },
-  },
-};
-
 const SERVICIOS = [
   {
     icon: Search,
     title: "SEO",
-    description: "Posicionamiento orgánico y visibilidad en buscadores para que te encuentren cuando buscan.",
+    description: "Que te encuentren cuando buscan: posicionamiento orgánico, contenido y técnico para crecer sin depender solo de paid.",
   },
   {
     icon: Megaphone,
     title: "SEM y paid",
-    description: "Campañas en Google, Meta y LinkedIn para captar tráfico y leads de forma medible.",
+    description: "Campañas en Google, Meta y LinkedIn con métricas claras. Tráfico y leads desde el día uno, sin disparar a ciegas.",
   },
   {
     icon: Zap,
     title: "Automatización",
-    description: "Flujos, emails y procesos que ahorran tiempo y escalan sin multiplicar el esfuerzo.",
+    description: "Flujos, emails y procesos que escalan sin multiplicar horas. Menos trabajo manual, más resultado.",
   },
   {
     icon: Target,
     title: "Estrategia",
-    description: "Objetivos claros, métricas y un plan que conecta marketing con resultados de negocio.",
+    description: "Objetivos definidos, KPIs y un plan que une marketing con resultados de negocio. Sin humo.",
   },
 ];
 
@@ -93,9 +80,10 @@ const FAQS = [
 
 export default function HomePage() {
   const [faqOpenIndex, setFaqOpenIndex] = useState<number | null>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   return (
-    <>
+    <MotionConfig reducedMotion={shouldReduceMotion ? "user" : "always"}>
       {/* Hero: viewport completo + Spotlight; siguiente sección al hacer scroll */}
       <motion.section
         className="relative z-10 flex min-h-[calc(100dvh-6rem)] flex-col items-center justify-center overflow-hidden px-6 py-12 text-center"
@@ -119,12 +107,19 @@ export default function HomePage() {
         <motion.h1
           variants={fadeUp}
           transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="mb-8 max-w-2xl text-3xl font-semibold leading-tight text-white sm:text-4xl md:text-5xl"
+          className="mb-4 max-w-2xl text-3xl font-semibold leading-tight text-white sm:text-4xl md:text-5xl"
         >
           Build something that
           <br />
           outlasts you.
         </motion.h1>
+        <motion.p
+          variants={fadeUp}
+          transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="mb-8 max-w-lg text-zinc-400 text-sm sm:text-base"
+        >
+          Growth marketing con foco en resultados: SEO, paid y estrategia. Herramientas gratis y sesión de 30 min sin compromiso.
+        </motion.p>
 
         {/* CTA principal — StarBorder color plata premium */}
         <motion.div
@@ -197,6 +192,26 @@ export default function HomePage() {
             <ChevronDown className="size-4" aria-hidden />
           </motion.div>
         </motion.div>
+      </motion.section>
+
+      {/* Trust strip: señales rápidas (best practice landing) */}
+      <motion.section
+        className="relative z-10 px-6 py-8 [content-visibility:auto] [contain-intrinsic-size:auto_80px]"
+        aria-label="Confianza y recursos"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="mx-auto max-w-3xl">
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-center">
+            <span className="text-zinc-500 text-sm">Sesión de consultoría sin compromiso</span>
+            <span className="text-zinc-600" aria-hidden>·</span>
+            <span className="text-zinc-500 text-sm">Herramientas SEO gratuitas</span>
+            <span className="text-zinc-600" aria-hidden>·</span>
+            <span className="text-zinc-500 text-sm">Guías y blog actualizado</span>
+          </div>
+        </div>
       </motion.section>
 
       {/* Servicios — grid uniforme; content-visibility para Core Web Vitals */}
@@ -359,6 +374,45 @@ export default function HomePage() {
         </div>
       </motion.section>
 
+      {/* CTA final — mismo nivel que Framer: conversión al cerrar scroll */}
+      <motion.section
+        className="relative z-10 px-6 py-20 sm:py-24 [content-visibility:auto] [contain-intrinsic-size:auto_280px]"
+        aria-label="Reservar sesión"
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-80px" }}
+        variants={container}
+      >
+        <div className="mx-auto max-w-2xl text-center">
+          <motion.h2
+            variants={fadeUp}
+            className="mb-3 text-2xl font-semibold text-white sm:text-3xl"
+          >
+            ¿Listo para dar el siguiente paso?
+          </motion.h2>
+          <motion.p
+            variants={fadeUp}
+            className="mb-8 text-zinc-400 text-sm sm:text-base"
+          >
+            Una llamada de 30 minutos para revisar tu situación y objetivos. Sin compromiso.
+          </motion.p>
+          <motion.div variants={fadeUp}>
+            <StarBorder
+              as="a"
+              href={CALENDLY_URL}
+              onClick={openCalendlyPopup}
+              onMouseEnter={preloadCalendly}
+              color="#d4d4d4"
+              speed="8s"
+              thickness={1}
+              className="cta-premium inline-block"
+            >
+              Reservar sesión gratis
+            </StarBorder>
+          </motion.div>
+        </div>
+      </motion.section>
+
       {/* Schema.org FAQPage (JSON-LD) para SEO */}
       <script
         type="application/ld+json"
@@ -377,6 +431,6 @@ export default function HomePage() {
           }),
         }}
       />
-    </>
+    </MotionConfig>
   );
 }
