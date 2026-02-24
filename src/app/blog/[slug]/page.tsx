@@ -95,6 +95,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       : null;
 
   let h2Index = 0;
+  const defaultImageAlt = post.imageAlt ?? post.title;
   const mdComponents = {
     h2: ({ children, ...props }: ComponentProps<"h2">) => {
       const id = toc[h2Index]?.id;
@@ -105,6 +106,13 @@ export default async function BlogPostPage({ params }: PageProps) {
         </h2>
       );
     },
+    img: ({ src, alt, ...props }: ComponentProps<"img">) => (
+      <img
+        src={src}
+        alt={alt ?? defaultImageAlt}
+        {...props}
+      />
+    ),
   };
 
   const dateOptions: Intl.DateTimeFormatOptions = {
@@ -162,7 +170,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                   >
                     <Image
                       src={AUTHOR_IMAGE_URL}
-                      alt=""
+                      alt={post.author || "Marco Samplina"}
                       width={40}
                       height={40}
                       className="size-10 rounded-full object-cover border border-white/10"
@@ -177,18 +185,6 @@ export default async function BlogPostPage({ params }: PageProps) {
                     </span>
                   </a>
                 </div>
-                {post.image && (
-                  <figure className="mt-6 overflow-hidden rounded-2xl border border-white/10">
-                    <img
-                      src={post.image}
-                      alt={post.imageAlt ?? post.title}
-                      width={1200}
-                      height={630}
-                      className="w-full object-cover"
-                      fetchPriority="high"
-                    />
-                  </figure>
-                )}
               </header>
               <div
                 className="blog-content text-zinc-300 [&_h2]:mt-10 [&_h2]:scroll-mt-24 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-white [&_h3]:mt-6 [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-white [&_p]:mb-4 [&_p]:leading-relaxed [&_a]:text-white [&_a]:underline [&_a]:hover:no-underline [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_li]:mb-1 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-4 [&_img]:my-6 [&_img]:w-full [&_img]:rounded-2xl [&_img]:border [&_img]:border-white/10"
@@ -205,7 +201,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               )}
             </div>
 
-            <aside className="lg:sticky lg:top-24 lg:self-start">
+            <aside className="lg:sticky lg:top-24 lg:max-h-[calc(100vh-6rem)] lg:self-start lg:overflow-y-auto">
               <BlogPostSidebar
                 relatedPosts={relatedPosts}
                 toc={toc}

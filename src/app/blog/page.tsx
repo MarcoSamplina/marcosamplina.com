@@ -6,6 +6,11 @@ export const metadata = {
   title: "Blog | Marco Samplina",
   description:
     "Artículos sobre marketing digital, SEO, herramientas y estrategia. Marco Samplina.",
+  openGraph: {
+    title: "Blog | Marco Samplina",
+    description:
+      "Artículos sobre marketing digital, SEO, herramientas y estrategia. Marco Samplina.",
+  },
 };
 
 export default function BlogPage() {
