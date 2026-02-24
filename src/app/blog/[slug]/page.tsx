@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { getPostBySlug, getAllSlugs, getRelatedPosts } from "@/lib/blog";
 import { getReadingTimeMinutes, getTableOfContents } from "@/lib/blog-utils";
 import { BlogPostCta } from "@/components/BlogPostCta";
@@ -126,8 +127,6 @@ export default async function BlogPostPage({ params }: PageProps) {
       <article
         className="relative z-10 min-h-screen px-6 py-16 sm:py-20"
         aria-label={post.title}
-        itemScope
-        itemType="https://schema.org/Article"
       >
         <div className="mx-auto max-w-6xl">
           <Link
@@ -140,16 +139,13 @@ export default async function BlogPostPage({ params }: PageProps) {
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_280px]">
             <div className="min-w-0">
               <header className="mb-10">
-                <h1
-                  className="mb-4 text-3xl font-semibold text-white sm:text-4xl"
-                  itemProp="headline"
-                >
+                <h1 className="mb-4 text-3xl font-semibold text-white sm:text-4xl">
                   {post.title}
                 </h1>
                 <div className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-zinc-500 text-sm">
                   <span>{readingMinutes} min de lectura</span>
                   {post.date && (
-                    <time dateTime={post.date} itemProp="datePublished">
+                    <time dateTime={post.date}>
                       {new Date(post.date).toLocaleDateString("es-ES", dateOptions)}
                     </time>
                   )}
@@ -175,22 +171,16 @@ export default async function BlogPostPage({ params }: PageProps) {
                       height={40}
                       className="size-10 rounded-full object-cover border border-white/10"
                     />
-                    <span
-                      itemProp="author"
-                      itemScope
-                      itemType="https://schema.org/Person"
-                      className="font-medium text-white"
-                    >
-                      <span itemProp="name">{post.author}</span>
-                    </span>
+                    <span className="font-medium text-white">{post.author}</span>
                   </a>
                 </div>
               </header>
               <div
-                className="blog-content text-zinc-300 [&_h2]:mt-10 [&_h2]:scroll-mt-24 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-white [&_h3]:mt-6 [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-white [&_p]:mb-4 [&_p]:leading-relaxed [&_a]:text-white [&_a]:underline [&_a]:hover:no-underline [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_li]:mb-1 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-4 [&_img]:my-6 [&_img]:w-full [&_img]:rounded-2xl [&_img]:border [&_img]:border-white/10"
-                itemProp="articleBody"
+                className="blog-content text-zinc-300 [&_h2]:mt-10 [&_h2]:scroll-mt-24 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-white [&_h3]:mt-6 [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-white [&_p]:mb-4 [&_p]:leading-relaxed [&_a]:text-white [&_a]:underline [&_a]:hover:no-underline [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_ul]:space-y-1 [&_li]:mb-1 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-4 [&_ol]:space-y-1 [&_img]:my-6 [&_img]:w-full [&_img]:rounded-2xl [&_img]:border [&_img]:border-white/10 [&_table]:my-8 [&_table]:w-full [&_table]:border-collapse [&_th]:border [&_th]:border-white/20 [&_th]:bg-white/5 [&_th]:px-4 [&_th]:py-3 [&_th]:text-left [&_th]:text-sm [&_th]:font-semibold [&_th]:text-white [&_td]:border [&_td]:border-white/10 [&_td]:px-4 [&_td]:py-3 [&_td]:text-sm [&_thead]:border-b [&_thead]:border-white/20"
               >
-                <ReactMarkdown components={mdComponents}>{post.content}</ReactMarkdown>
+                <ReactMarkdown remarkPlugins={[remarkGfm]} components={mdComponents}>
+                  {post.content}
+                </ReactMarkdown>
               </div>
 
               <BlogCurvedLine />
@@ -201,12 +191,14 @@ export default async function BlogPostPage({ params }: PageProps) {
               )}
             </div>
 
-            <aside className="lg:sticky lg:top-24 lg:max-h-[calc(100vh-6rem)] lg:self-start lg:overflow-y-auto">
-              <BlogPostSidebar
-                relatedPosts={relatedPosts}
-                toc={toc}
-                showCta={!!post.cta}
-              />
+            <aside className="lg:sticky lg:top-20 lg:z-10 lg:self-start">
+              <div className="lg:max-h-[calc(100vh-5rem)] lg:overflow-y-auto lg:pr-2">
+                <BlogPostSidebar
+                  relatedPosts={relatedPosts}
+                  toc={toc}
+                  showCta={!!post.cta}
+                />
+              </div>
             </aside>
           </div>
         </div>

@@ -36,11 +36,37 @@ El SEO clásico se centraba en aparecer en las primeras posiciones: elegir palab
 
 Ejemplos concretos del cambio: antes, una guía rankeaba si tenía buena densidad de keyword y backlinks; ahora, esa misma guía puede no aparecer en el snippet clásico pero sí ser citada en el AI Overview si la IA la considera fiable y fácil de extraer. Las comparativas bien estructuradas, los estudios con datos y las herramientas propias pasan a ser activos que la IA suele preferir. El juego ya no es solo “estar arriba”, sino “ser la referencia que el modelo usa”.
 
+### Comparativa: SEO clásico vs SEO 2026
+
+| Aspecto | SEO clásico (antes) | SEO 2026 (ahora) |
+| --- | --- | --- |
+| **Objetivo principal** | Aparecer en las primeras posiciones | Ser citado como fuente por la IA y los usuarios |
+| **Métrica clave** | Posición en SERP, clics | Citación en AI Overviews, autoridad percibida |
+| **Contenido** | Densidad de keyword, on-page | Extractabilidad: respuestas claras, listas, tablas, datos |
+| **Enlaces** | Backlinks y anchor text | Menciones externas, entidad y autoridad |
+| **Señales técnicas** | Diferencial competitivo | Precio de entrada (mínimo viable) |
+| **Quién importa** | El sitio rankea | La persona o marca detrás (E-E-A-T) |
+
+### Resumen en 4 puntos
+
+- **De posiciones a citas:** el valor ya no es solo "estar primero", sino "ser la fuente que la IA usa".
+- **Contenido extractable:** respuestas al inicio, H2/H3 claros, listas, tablas y FAQs mejoran citación.
+- **Entidad y E-E-A-T:** bio, about, schema y menciones externas construyen autoridad para Google y la IA.
+- **Base técnica + diferencial:** CWV y schema son el mínimo; el diferencial es ser citado y ser referencia.
+
 ## De posiciones a citas: el nuevo juego del SEO
 
 El cambio de mentalidad es este: dejar de obsesionarse solo con “estar arriba” y empezar a pensar en “ser citado como referencia”. Una cita en contexto de IA es que el modelo use tu contenido como base para su respuesta y muestre tu dominio (o tu marca) como fuente. Eso tiene más valor para brand y negocio que una posición alta sin citación: te asocia con la respuesta correcta y te sitúa como autoridad.
 
-Contenidos que suelen ser citados: comparativas objetivas con criterios claros, guías profundas con pasos y datos, estudios propios o recopilados, herramientas y calculadoras, y artículos que responden de forma directa a una pregunta concreta. Invertir en este tipo de activos es invertir en el nuevo SEO.
+Contenidos que suelen ser citados por la IA:
+
+- Comparativas objetivas con criterios claros
+- Guías profundas con pasos y datos
+- Estudios propios o recopilados
+- Herramientas y calculadoras
+- Artículos que responden de forma directa a una pregunta concreta
+
+Invertir en este tipo de activos es invertir en el nuevo SEO.
 
 ## Cómo estructurar contenido para que la IA pueda extraerlo (extractabilidad)
 

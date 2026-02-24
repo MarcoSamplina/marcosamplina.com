@@ -25,20 +25,22 @@ export function BlogPostFaq({ faqs, title = "Preguntas frecuentes sobre SEO en 2
               className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm transition-colors hover:border-white/15 hover:bg-white/[0.06]"
             >
               <dt>
-                <button
-                  type="button"
-                  onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="flex w-full items-center justify-between gap-3 px-6 py-4 text-left font-semibold text-white"
-                  aria-expanded={isOpen}
-                  aria-controls={`blog-faq-answer-${i}`}
-                  id={`blog-faq-question-${i}`}
-                >
-                  <span>{faq.question}</span>
-                  <ChevronDown
-                    className={`size-5 shrink-0 text-zinc-400 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-                    aria-hidden
-                  />
-                </button>
+                <h3 className="text-base font-semibold text-white">
+                  <button
+                    type="button"
+                    onClick={() => setOpenIndex(isOpen ? null : i)}
+                    className="flex w-full items-center justify-between gap-3 px-6 py-4 text-left font-semibold text-white"
+                    aria-expanded={isOpen}
+                    aria-controls={`blog-faq-answer-${i}`}
+                    id={`blog-faq-question-${i}`}
+                  >
+                    <span>{faq.question}</span>
+                    <ChevronDown
+                      className={`size-5 shrink-0 text-zinc-400 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                      aria-hidden
+                    />
+                  </button>
+                </h3>
               </dt>
               <dd className="border-t border-white/10" aria-hidden={!isOpen}>
                 <motion.div
