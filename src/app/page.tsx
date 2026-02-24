@@ -1,8 +1,9 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useState } from "react";
 import { motion } from "motion/react";
-import { Linkedin, Calendar, Globe, Wrench, Search, Megaphone, Zap, Target } from "lucide-react";
+import { Linkedin, Calendar, Globe, Wrench, Search, Megaphone, Zap, Target, ChevronDown } from "lucide-react";
 import { openCalendlyPopup, preloadCalendly } from "@/lib/calendly";
 
 const StarBorder = dynamic(
@@ -82,6 +83,8 @@ const FAQS = [
 ];
 
 export default function HomePage() {
+  const [faqOpenIndex, setFaqOpenIndex] = useState<number | null>(null);
+
   return (
     <>
       {/* Hero: ocupa todo el viewport; la siguiente sección solo se ve al hacer scroll */}
@@ -171,7 +174,7 @@ export default function HomePage() {
         </motion.div>
       </motion.section>
 
-      {/* Servicios — bento grid (estilo moderno); SEO: section + h2 + h3 + p */}
+      {/* Servicios — grid uniforme; SEO: section + h2 + h3 + p */}
       <motion.section
         className="relative z-10 px-6 py-16 sm:py-20"
         aria-label="Servicios de marketing digital"
@@ -180,31 +183,25 @@ export default function HomePage() {
         viewport={{ once: true, margin: "-80px" }}
         variants={container}
       >
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-4xl">
           <motion.h2
             variants={fadeUp}
             className="mb-12 text-center text-2xl font-semibold text-white sm:text-3xl"
           >
             Qué hago
           </motion.h2>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
-            {/* Bento: primera celda alta (2 filas), resto apiladas a la derecha */}
-            {SERVICIOS.map(({ icon: Icon, title, description }, i) => (
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {SERVICIOS.map(({ icon: Icon, title, description }) => (
               <motion.article
                 key={title}
                 variants={fadeUp}
-                className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:bg-white/[0.07] sm:p-7 ${
-                  i === 0
-                    ? "sm:row-span-2 sm:flex sm:flex-col sm:justify-between sm:ring-1 sm:ring-white/15 sm:hover:ring-white/25"
-                    : ""
-                }`}
+                className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-colors hover:border-white/15 hover:bg-white/[0.08]"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden />
-                <span className="relative mb-4 inline-flex size-12 items-center justify-center rounded-xl border border-white/15 bg-white/5 text-white shadow-inner sm:size-14">
-                  <Icon className="size-6 sm:size-7" />
+                <span className="mb-4 flex size-11 items-center justify-center rounded-xl border border-white/20 bg-white/5 text-white">
+                  <Icon className="size-5" />
                 </span>
-                <h3 className="relative mb-2 font-semibold text-white sm:text-lg">{title}</h3>
-                <p className="relative text-sm leading-relaxed text-zinc-400">{description}</p>
+                <h3 className="mb-2 font-semibold text-white">{title}</h3>
+                <p className="text-sm leading-relaxed text-zinc-400">{description}</p>
               </motion.article>
             ))}
           </div>
@@ -262,17 +259,49 @@ export default function HomePage() {
           >
             Preguntas frecuentes
           </motion.h2>
-          <dl className="space-y-6">
-            {FAQS.map(({ question, answer }, i) => (
-              <motion.div
-                key={question}
-                variants={fadeUp}
-                className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm transition-colors hover:border-white/15 hover:bg-white/[0.06]"
-              >
-                <dt className="mb-2 font-semibold text-white">{question}</dt>
-                <dd className="text-sm leading-relaxed text-zinc-400">{answer}</dd>
-              </motion.div>
-            ))}
+          <dl className="space-y-3">
+            {FAQS.map(({ question, answer }, i) => {
+              const isOpen = faqOpenIndex === i;
+              return (
+                <motion.div
+                  key={question}
+                  variants={fadeUp}
+                  className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm transition-colors hover:border-white/15 hover:bg-white/[0.06]"
+                >
+                  <dt>
+                    <button
+                      type="button"
+                      onClick={() => setFaqOpenIndex(isOpen ? null : i)}
+                      className="flex w-full items-center justify-between gap-3 px-6 py-4 text-left font-semibold text-white"
+                      aria-expanded={isOpen}
+                      aria-controls={`faq-answer-${i}`}
+                      id={`faq-question-${i}`}
+                    >
+                      <span>{question}</span>
+                      <ChevronDown
+                        className={`size-5 shrink-0 text-zinc-400 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                        aria-hidden
+                      />
+                    </button>
+                  </dt>
+                  <dd className="border-t border-white/10" aria-hidden={!isOpen}>
+                    <motion.div
+                      id={`faq-answer-${i}`}
+                      role="region"
+                      aria-labelledby={`faq-question-${i}`}
+                      initial={false}
+                      animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+                      transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+                      className="overflow-hidden"
+                    >
+                      <p className="px-6 pb-4 pt-1 text-sm leading-relaxed text-zinc-400">
+                        {answer}
+                      </p>
+                    </motion.div>
+                  </dd>
+                </motion.div>
+              );
+            })}
           </dl>
         </div>
       </motion.section>

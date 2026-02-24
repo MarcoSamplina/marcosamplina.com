@@ -88,6 +88,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             >
               Portafolio
             </Link>
+            <Link href="/sobre-mi" className={navLinkClass}>
+              Sobre mí
+            </Link>
             <a
               href={CALENDLY_URL}
               onClick={openCalendlyPopup}
@@ -150,6 +153,13 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                   className="nav-link-shiny block border-b border-white/10 px-4 py-3.5 text-left text-base font-medium text-zinc-300 hover:bg-white/5 hover:text-white"
                 >
                   Portafolio
+                </Link>
+                <Link
+                  href="/sobre-mi"
+                  onClick={closeMobileMenu}
+                  className="nav-link-shiny block border-b border-white/10 px-4 py-3.5 text-left text-base font-medium text-zinc-300 hover:bg-white/5 hover:text-white"
+                >
+                  Sobre mí
                 </Link>
                 <a
                   href={CALENDLY_URL}
