@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 
-export const size = { width: 48, height: 48 };
+/** 96x96: Google recomienda >48px para favicon en SERP; los navegadores escalan bien */
+export const size = { width: 96, height: 96 };
 export const contentType = "image/png";
 
 export default function Icon() {
@@ -15,10 +16,10 @@ export default function Icon() {
           justifyContent: "center",
           background: "#18181b",
           color: "#fafafa",
-          fontSize: 26,
+          fontSize: 48,
           fontWeight: 700,
           fontFamily: "system-ui, sans-serif",
-          borderRadius: 8,
+          borderRadius: 12,
         }}
       >
         M

@@ -24,8 +24,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Growth Marketing Specialist | Marco Samplina",
   icons: {
-    icon: "/icon",
-    shortcut: "/icon",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon", type: "image/png", sizes: "96x96" },
+    ],
+    shortcut: "/favicon.ico",
   },
   description:
     "Growth Marketing Specialist. SEO, SEM, automatización y estrategia digital. Herramientas gratis, guías y reserva de sesión.",
@@ -97,8 +100,8 @@ export default function RootLayout({
     <html lang="es" className="dark" suppressHydrationWarning>
       <head>
         <meta name="google-site-verification" content="_-7kJm0ua9w444U_MniD8OpVL4uihggvedMinoT7vKU" />
-        <link rel="icon" href={`${SITE_URL}/icon`} type="image/png" sizes="48x48" />
-        <link rel="shortcut icon" href={`${SITE_URL}/icon`} type="image/png" />
+        <link rel="icon" href={`${SITE_URL}/favicon.ico`} sizes="any" />
+        <link rel="shortcut icon" href={`${SITE_URL}/favicon.ico`} />
         <link rel="preconnect" href="https://assets.calendly.com" />
         <link rel="dns-prefetch" href="https://assets.calendly.com" />
         <script

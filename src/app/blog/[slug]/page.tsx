@@ -5,7 +5,7 @@ import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { getPostBySlug, getAllSlugs, getRelatedPosts } from "@/lib/blog";
-import { getReadingTimeMinutes, getTableOfContents } from "@/lib/blog-utils";
+import { getReadingTimeMinutes, getTableOfContents, getWordCount } from "@/lib/blog-utils";
 import { BlogPostCta } from "@/components/BlogPostCta";
 import { BlogPostFaq } from "@/components/BlogPostFaq";
 import { BlogPostVisualBreak } from "@/components/BlogPostVisualBreak";
@@ -16,6 +16,15 @@ const SITE_URL = "https://marcosamplina.com";
 const LINKEDIN_URL = "https://www.linkedin.com/in/marco-samplina-cordova";
 const AUTHOR_IMAGE_URL =
   "https://hpgodeemiqtbixwnzzvd.supabase.co/storage/v1/object/public/media/general/1771457705483-marco_linkedin.webp";
+
+/** URLs del autor para schema sameAs (entidad y autoridad) */
+const AUTHOR_SAME_AS = [
+  "https://www.linkedin.com/in/marco-samplina-cordova",
+  "https://www.instagram.com/marcotgod",
+  "https://calendly.com/marco-samplina/30min",
+  "https://marco-samplina.framer.website/",
+  "https://tools.marcosamplina.com",
+];
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -50,6 +59,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   const postUrl = `${SITE_URL}/blog/${slug}`;
   const readingMinutes = getReadingTimeMinutes(post.content);
+  const wordCount = getWordCount(post.content);
   const toc = getTableOfContents(post.content);
   const relatedPosts = getRelatedPosts(slug, 3);
 
@@ -60,15 +70,22 @@ export default async function BlogPostPage({ params }: PageProps) {
     description: post.description,
     datePublished: post.date,
     dateModified: post.dateModified ?? post.date,
+    inLanguage: "es",
+    wordCount,
     author: {
       "@type": "Person",
       name: post.author || "Marco Samplina",
       url: LINKEDIN_URL,
+      sameAs: AUTHOR_SAME_AS,
     },
     publisher: {
       "@type": "Organization",
       name: "Marco Samplina",
       url: SITE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/icon`,
+      },
     },
     mainEntityOfPage: { "@type": "WebPage", "@id": postUrl },
     url: postUrl,

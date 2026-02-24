@@ -1,10 +1,15 @@
 /** Palabras por minuto para tiempo de lectura (español) */
 const WORDS_PER_MINUTE = 200;
 
+/** Cuenta palabras del contenido (markdown sin código ni enlaces) */
+export function getWordCount(content: string): number {
+  const plain = content.replace(/```[\s\S]*?```/g, "").replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
+  return plain.split(/\s+/).filter(Boolean).length;
+}
+
 /** Tiempo de lectura en minutos a partir del contenido en markdown */
 export function getReadingTimeMinutes(content: string): number {
-  const plain = content.replace(/```[\s\S]*?```/g, "").replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
-  const words = plain.split(/\s+/).filter(Boolean).length;
+  const words = getWordCount(content);
   return Math.max(1, Math.ceil(words / WORDS_PER_MINUTE));
 }
 
