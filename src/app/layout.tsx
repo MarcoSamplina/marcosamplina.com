@@ -79,6 +79,7 @@ export default function RootLayout({
         jobTitle: "Growth Marketing Specialist",
         sameAs: [
           "https://www.linkedin.com/in/marco-samplina-cordova",
+          "https://www.instagram.com/marcotgod",
           "https://calendly.com/marco-samplina/30min",
           "https://marco-samplina.framer.website/",
           "https://tools.marcosamplina.com",
