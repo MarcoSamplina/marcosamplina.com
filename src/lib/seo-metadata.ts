@@ -17,12 +17,16 @@
  *             https://developers.google.com/search/docs/appearance/snippet
  */
 
+/** Margen de error 5%: no superar estos valores para títulos y descripciones. */
+const MARGIN = 0.95;
+
 export const SEO_LIMITS = {
-  /** Longitud recomendada para title (evitar truncado en SERP). Google no tiene límite fijo pero prioriza el inicio. */
+  /** Title: máximo 60 caracteres en SERP. Con 5% margen, usar ≤57 para estar seguro. */
   TITLE_MAX_CHARS: 60,
-  /** Meta description: objetivo 150-160 para mostrarse completa. */
-  DESCRIPTION_MIN_CHARS: 150,
-  DESCRIPTION_MAX_CHARS: 160,
+  TITLE_SAFE_CHARS: Math.floor(60 * MARGIN), // 57
+  /** Meta description: recomendado 150-160. Con 5% margen: 143-168. */
+  DESCRIPTION_MIN_CHARS: Math.floor(150 * MARGIN), // 143
+  DESCRIPTION_MAX_CHARS: Math.ceil(160 / MARGIN),  // 168
 } as const;
 
 export const SITE_NAME = "Marco Samplina";

@@ -214,7 +214,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             {/* Espaciador reserva el hueco; el aside es fixed para que siga el scroll (evita problemas con overflow en ancestros) */}
             <div className="relative z-10 mt-12 lg:mt-0 lg:w-[280px] lg:shrink-0">
               <aside
-                className="lg:fixed lg:top-20 lg:left-[calc(50%+min(36rem,50vw-1.5rem)-280px-3rem)] lg:w-[280px] lg:max-h-[calc(100vh-5rem)] lg:overflow-y-auto lg:pr-2"
+                className="lg:fixed lg:top-20 lg:left-[calc(50%+min(36rem,50vw-1.5rem)-280px-3rem)] lg:w-[280px] lg:max-h-[calc(100vh-5rem)] lg:overflow-y-auto lg:pl-6 lg:pr-2 lg:border-l lg:border-white/10"
                 aria-label="En esta entrada y recursos"
               >
                 <BlogPostSidebar

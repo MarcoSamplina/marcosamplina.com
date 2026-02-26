@@ -1,5 +1,5 @@
 ---
-title: "Cómo aparecer en los resultados de inteligencia artificial (IA)"
+title: "Cómo aparecer en resultados de IA: guía GEO y AEO"
 date: 2026-02-25
 description: "Guía GEO y AEO: cómo optimizar tu contenido para que ChatGPT, Google AI Overviews y otros motores con IA te citen como fuente. Técnicas de experto."
 author: "Marco Samplina"

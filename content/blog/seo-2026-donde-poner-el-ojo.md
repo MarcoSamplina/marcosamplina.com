@@ -1,7 +1,7 @@
 ---
 title: "El SEO ya no es el mismo: dónde poner el ojo en 2026"
 date: 2026-02-21
-description: "Cómo ha cambiado el SEO en 2026: IA, AI Overviews, ser citado como fuente, E-E-A-T y contenido extractable. Guía práctica."
+description: "Cómo ha cambiado el SEO en 2026: IA, AI Overviews, ser citado como fuente, E-E-A-T y contenido extractable. Guía práctica para adaptar tu estrategia."
 author: "Marco Samplina"
 published: true
 metaTitle: "SEO en 2026: en qué fijarse ahora de verdad"

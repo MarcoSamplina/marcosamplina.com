@@ -1,5 +1,5 @@
 ---
-title: "Funcionalidades SERP: cómo optimizar tu contenido para aparecer en resultados enriquecidos"
+title: "Funcionalidades SERP: optimizar contenido para resultados enriquecidos"
 date: 2026-02-26
 description: "Guía práctica: featured snippets, PAA, knowledge panel, local pack y más. Estructura y técnicas para que tu contenido aparezca en las funcionalidades SERP y en IA."
 author: "Marco Samplina"

@@ -15,7 +15,7 @@ export function BlogPostSidebar({
   showCta,
 }: BlogPostSidebarProps) {
   return (
-    <aside className="space-y-10">
+    <aside className="space-y-10 pl-1">
       {toc.length > 0 && (
         <nav aria-label="En esta entrada">
           <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-zinc-500">

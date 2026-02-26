@@ -1,0 +1,21 @@
+---
+description: Aplicar manual GEO/IA al contenido, blog, metadata y SEO
+globs: content/blog/**/*.md, src/app/blog/**/*.tsx, src/app/**/layout.tsx, src/app/**/page.tsx, src/app/sitemap.xml/**/*
+alwaysApply: false
+---
+
+# GEO e IA: estándar de contenido y técnica
+
+Al crear o editar contenido del blog, metadata, layouts o estructura del sitio, sigue el manual en **`docs/GEO_IA_GUIDELINES.md`**.
+
+Resumen obligatorio:
+
+- **Contenido:** respuesta directa en las primeras 2–3 frases; H2/H3 en forma de pregunta; listas, tablas y FAQs; información nueva y datos; lenguaje claro y actualizado.
+- **E-E-A-T:** autor identificado con bio; clusters temáticos y enlaces internos; fuentes citadas; fechas visibles.
+- **Entidad:** entity home (about/home); schema Person/Organization con sameAs y knowsAbout; densidad de entidades en el texto.
+- **Técnica:** indexación correcta, CWV, schema (Article, FAQPage, HowTo, etc.), sitemap, alt en imágenes.
+- **Señales externas:** coherencia de marca y misma bio en todas las plataformas.
+
+Antes de publicar contenido o cambiar títulos/descripciones, revisar el **checklist de 11 puntos** al final de `docs/GEO_IA_GUIDELINES.md`.
+
+**Límites con 5% margen (ver `src/lib/seo-metadata.ts`):** Título ≤57 caracteres (máx 60 en SERP). Meta description entre 143 y 168 caracteres. No superar estos valores en ningún post ni página.
