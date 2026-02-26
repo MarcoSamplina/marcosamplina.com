@@ -3,16 +3,10 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import { motion, useReducedMotion, MotionConfig } from "motion/react";
-import { Linkedin, Calendar, Globe, Wrench, Search, Megaphone, Zap, Target, ChevronDown } from "lucide-react";
+import { Linkedin, Calendar, Globe, Wrench, Search, Megaphone, Zap, Target, ChevronDown, BookOpen } from "lucide-react";
 import { Spotlight } from "@/components/ui/spotlight";
 
-const AnimatedBeamSection = dynamic(
-  () => import("@/components/AnimatedBeamSection").then((m) => m.AnimatedBeamSection),
-  {
-    ssr: false,
-    loading: () => <div className="min-h-[280px] w-full" aria-hidden />,
-  }
-);
+import { ProcessSection } from "@/components/ProcessSection";
 import { openCalendlyPopup, preloadCalendly } from "@/lib/calendly";
 
 const StarBorder = dynamic(
@@ -284,7 +278,7 @@ export default function HomePage() {
             Objetivos claros, plan de acción y ejecución medible. Así conectamos tu situación actual con los resultados que buscas, sin pasos de más.
           </motion.p>
           <motion.div variants={fadeUp}>
-            <AnimatedBeamSection />
+            <ProcessSection />
           </motion.div>
         </div>
       </motion.section>
@@ -322,6 +316,65 @@ export default function HomePage() {
               </p>
             </div>
           </motion.article>
+        </div>
+      </motion.section>
+
+      {/* Recursos — Blog y Herramientas */}
+      <motion.section
+        className="relative z-10 px-6 py-16 sm:py-20 [content-visibility:auto] [contain-intrinsic-size:auto_320px]"
+        aria-label="Recursos"
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-80px" }}
+        variants={container}
+      >
+        <div className="mx-auto max-w-4xl">
+          <motion.h2
+            variants={fadeUp}
+            className="mb-4 text-center text-2xl font-semibold text-white sm:text-3xl"
+          >
+            Recursos
+          </motion.h2>
+          <motion.p
+            variants={fadeUp}
+            className="mb-10 text-center text-zinc-400 text-sm sm:text-base max-w-xl mx-auto"
+          >
+            Guías, artículos y herramientas que puedes usar sin compromiso.
+          </motion.p>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <motion.a
+              href="/blog"
+              variants={fadeUp}
+              className="group flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-colors hover:border-white/20 hover:bg-white/[0.08]"
+            >
+              <span className="flex size-12 items-center justify-center rounded-xl border border-white/20 bg-white/5 text-white transition-colors group-hover:bg-white/10">
+                <BookOpen className="size-6" />
+              </span>
+              <div className="text-left">
+                <h3 className="mb-1.5 font-semibold text-white">Blog</h3>
+                <p className="text-sm leading-relaxed text-zinc-400">
+                  Guías y artículos sobre SEO, paid, automatización y estrategia. Actualizado con enfoque 2026.
+                </p>
+              </div>
+            </motion.a>
+            <motion.a
+              href={TOOLS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              variants={fadeUp}
+              className="group flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-colors hover:border-white/20 hover:bg-white/[0.08]"
+            >
+              <span className="flex size-12 items-center justify-center rounded-xl border border-white/20 bg-white/5 text-white transition-colors group-hover:bg-white/10">
+                <Wrench className="size-6" />
+              </span>
+              <div className="text-left">
+                <h3 className="mb-1.5 font-semibold text-white">Herramientas</h3>
+                <p className="text-sm leading-relaxed text-zinc-400">
+                  Herramientas SEO y de marketing gratuitas. Sin registro para la mayoría.
+                </p>
+              </div>
+            </motion.a>
+          </div>
         </div>
       </motion.section>
 

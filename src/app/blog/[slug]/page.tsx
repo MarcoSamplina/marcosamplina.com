@@ -41,12 +41,15 @@ export async function generateMetadata({ params }: PageProps) {
   if (!post) return { title: "Entrada no encontrada" };
   const title = post.metaTitle ?? `${post.title} | Blog — Marco Samplina`;
   const description = post.metaDescription ?? post.description;
+  const canonical = `${SITE_URL}/blog/${slug}`;
   return {
     title,
     description,
+    alternates: { canonical },
     openGraph: {
       title,
       description,
+      url: canonical,
       ...(post.image && { images: [{ url: post.image, width: 1200, height: 630, alt: post.imageAlt ?? post.title }] }),
     },
   };

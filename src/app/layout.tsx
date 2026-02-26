@@ -102,8 +102,6 @@ export default function RootLayout({
         <meta name="google-site-verification" content="_-7kJm0ua9w444U_MniD8OpVL4uihggvedMinoT7vKU" />
         <link rel="icon" href={`${SITE_URL}/favicon.ico`} sizes="any" />
         <link rel="shortcut icon" href={`${SITE_URL}/favicon.ico`} />
-        <link rel="preconnect" href="https://assets.calendly.com" />
-        <link rel="dns-prefetch" href="https://assets.calendly.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

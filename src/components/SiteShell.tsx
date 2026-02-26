@@ -57,7 +57,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   }, [mobileMenuOpen]);
 
   return (
-    <div className="relative flex min-h-dvh flex-col overflow-hidden bg-zinc-950">
+    <div className="relative flex min-h-dvh flex-col overflow-x-hidden bg-zinc-950">
       {/* Fondo: LightRays tras primer paint para no competir con LCP (Core Web Vitals) */}
       <div className="pointer-events-none fixed inset-0 z-0" aria-hidden>
         {deferBackground && <LightRays

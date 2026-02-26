@@ -12,6 +12,8 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizePackageImports: ["motion", "lucide-react"],
+    // Inline CSS en el HTML para evitar request bloqueante (~140 ms LCP/FCP)
+    inlineCss: true,
   },
 };
 
