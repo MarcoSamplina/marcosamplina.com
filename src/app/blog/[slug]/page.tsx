@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) return { title: "Entrada no encontrada" };
-  const title = post.metaTitle ?? `${post.title} | Blog — Marco Samplina`;
+  const title = post.metaTitle ?? post.title;
   const description = post.metaDescription ?? post.description;
   const canonical = `${SITE_URL}/blog/${slug}`;
   return {
@@ -211,15 +211,19 @@ export default async function BlogPostPage({ params }: PageProps) {
               )}
             </div>
 
-            <aside className="lg:sticky lg:top-20 lg:z-10 lg:self-start">
-              <div className="lg:max-h-[calc(100vh-5rem)] lg:overflow-y-auto lg:pr-2">
+            {/* Espaciador reserva el hueco; el aside es fixed para que siga el scroll (evita problemas con overflow en ancestros) */}
+            <div className="relative z-10 mt-12 lg:mt-0 lg:w-[280px] lg:shrink-0">
+              <aside
+                className="lg:fixed lg:top-20 lg:left-[calc(50%+min(36rem,50vw-1.5rem)-280px-3rem)] lg:w-[280px] lg:max-h-[calc(100vh-5rem)] lg:overflow-y-auto lg:pr-2"
+                aria-label="En esta entrada y recursos"
+              >
                 <BlogPostSidebar
                   relatedPosts={relatedPosts}
                   toc={toc}
                   showCta={!!post.cta}
                 />
-              </div>
-            </aside>
+              </aside>
+            </div>
           </div>
         </div>
       </article>

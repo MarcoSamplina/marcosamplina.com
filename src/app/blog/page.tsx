@@ -2,14 +2,24 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { getPosts } from "@/lib/blog";
 
+const SITE_URL = "https://marcosamplina.com";
+
 export const metadata = {
-  title: "Blog | Marco Samplina",
+  title: "Blog de marketing digital y SEO",
   description:
-    "Artículos sobre marketing digital, SEO, herramientas y estrategia. Marco Samplina.",
+    "Artículos sobre marketing digital, SEO, SEM, herramientas y estrategia. Guías prácticas, casos y reflexiones por Marco Samplina. Actualizado 2026.",
+  alternates: { canonical: `${SITE_URL}/blog` },
   openGraph: {
-    title: "Blog | Marco Samplina",
+    title: "Blog de marketing digital y SEO | Marco Samplina",
     description:
-      "Artículos sobre marketing digital, SEO, herramientas y estrategia. Marco Samplina.",
+      "Artículos sobre marketing digital, SEO, SEM, herramientas y estrategia. Guías prácticas, casos y reflexiones por Marco Samplina. Actualizado 2026.",
+    url: `${SITE_URL}/blog`,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog de marketing digital y SEO | Marco Samplina",
+    description:
+      "Artículos sobre marketing digital, SEO, SEM, herramientas y estrategia. Guías prácticas, casos y reflexiones por Marco Samplina. Actualizado 2026.",
   },
 };
 

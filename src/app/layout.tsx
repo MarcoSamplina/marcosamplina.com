@@ -22,7 +22,12 @@ const SITE_URL = "https://marcosamplina.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Growth Marketing Specialist | Marco Samplina",
+  title: {
+    default: "Growth Marketing Specialist",
+    template: "%s | Marco Samplina",
+  },
+  description:
+    "Growth Marketing Specialist: SEO, SEM y automatización. Herramientas gratis, guías en el blog y sesión de consultoría de 30 min sin compromiso. Marco Samplina.",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -30,8 +35,6 @@ export const metadata: Metadata = {
     ],
     shortcut: "/favicon.ico",
   },
-  description:
-    "Growth Marketing Specialist. SEO, SEM, automatización y estrategia digital. Herramientas gratis, guías y reserva de sesión.",
   keywords: [
     "growth marketing",
     "SEO",
@@ -46,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Growth Marketing Specialist | Marco Samplina",
     description:
-      "Growth Marketing Specialist. SEO, SEM, automatización y estrategia digital. Herramientas gratis, guías y reserva de sesión.",
+      "Growth Marketing Specialist: SEO, SEM y automatización. Herramientas gratis, guías en el blog y sesión de consultoría de 30 min sin compromiso. Marco Samplina.",
     url: "https://marcosamplina.com",
     siteName: "Marco Samplina",
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Marco Samplina — Growth Marketing Specialist" }],
@@ -57,7 +60,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Growth Marketing Specialist | Marco Samplina",
     description:
-      "Growth Marketing Specialist. SEO, SEM, automatización y estrategia digital. Herramientas gratis, guías y reserva de sesión.",
+      "Growth Marketing Specialist: SEO, SEM y automatización. Herramientas gratis, guías en el blog y sesión de consultoría de 30 min sin compromiso. Marco Samplina.",
     images: [OG_IMAGE],
   },
 };
@@ -76,7 +79,7 @@ export default function RootLayout({
         url: "https://marcosamplina.com",
         name: "Marco Samplina",
         description:
-          "Growth Marketing Specialist. SEO, SEM, automatización y estrategia digital. Herramientas gratis, guías y reserva de sesión.",
+          "Growth Marketing Specialist: SEO, SEM y automatización. Herramientas gratis, guías en el blog y sesión de consultoría de 30 min sin compromiso. Marco Samplina.",
         publisher: { "@id": "https://marcosamplina.com/#person" },
       },
       {
