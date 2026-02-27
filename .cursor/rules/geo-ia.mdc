@@ -19,3 +19,5 @@ Resumen obligatorio:
 Antes de publicar contenido o cambiar títulos/descripciones, revisar el **checklist de 11 puntos** al final de `docs/GEO_IA_GUIDELINES.md`.
 
 **Límites con 5% margen (ver `src/lib/seo-metadata.ts`):** Título ≤57 caracteres (máx 60 en SERP). Meta description entre 143 y 168 caracteres. No superar estos valores en ningún post ni página.
+
+**Home:** El title por defecto debe incluir **| MASC** (iniciales). No acortar el title de la home sin incluir marca; Open Graph y Twitter deben coincidir.

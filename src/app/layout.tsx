@@ -23,7 +23,7 @@ const SITE_URL = "https://marcosamplina.com";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Growth Marketing Specialist",
+    default: "Growth Marketing Specialist | MASC",
     template: "%s | Marco Samplina",
   },
   description:
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
   alternates: { canonical: "https://marcosamplina.com" },
   openGraph: {
-    title: "Growth Marketing Specialist | Marco Samplina",
+    title: "Growth Marketing Specialist | MASC",
     description:
       "Growth Marketing Specialist: SEO, SEM y automatización. Herramientas gratis, guías en el blog y sesión de consultoría de 30 min sin compromiso. Marco Samplina.",
     url: "https://marcosamplina.com",
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Growth Marketing Specialist | Marco Samplina",
+    title: "Growth Marketing Specialist | MASC",
     description:
       "Growth Marketing Specialist: SEO, SEM y automatización. Herramientas gratis, guías en el blog y sesión de consultoría de 30 min sin compromiso. Marco Samplina.",
     images: [OG_IMAGE],
