@@ -318,7 +318,7 @@ export default function HomePage() {
           <motion.div variants={fadeUp} className="flex justify-center">
             <HoverEffect
               titleAs="h3"
-              className="grid-cols-1 sm:grid-cols-2 py-0 gap-6 w-full max-w-2xl"
+              className="inline-grid grid-cols-1 sm:grid-cols-2 py-0 gap-6 max-w-2xl place-content-center"
               items={[
                 {
                   title: "Blog",
@@ -430,7 +430,7 @@ export default function HomePage() {
               onClick={openCalendlyPopup}
               onMouseEnter={preloadCalendly}
               containerClassName="bg-white/5 dark:bg-white/10 border-white/20 inline-block"
-              className="bg-zinc-900/80 px-8 py-3.5 text-sm font-medium text-white rounded-full"
+              className="relative z-20 bg-zinc-900 px-8 py-3.5 text-sm font-medium text-white rounded-full"
             >
               Reservar sesión gratis
             </HoverBorderGradient>

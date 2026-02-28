@@ -1,6 +1,7 @@
 "use client";
 
 import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
+import { StepObjetivos, StepEstrategia, StepEjecucion, StepResultados } from "@/components/ProcessStepVisuals";
 
 const STEPS = [
   { title: "Objetivos", description: "Definimos qué quieres lograr y cómo lo medimos." },
@@ -9,15 +10,20 @@ const STEPS = [
   { title: "Resultados", description: "Revisión y ajustes para seguir acercándote a la meta." },
 ];
 
+const STEP_VISUALS = [
+  <StepObjetivos key="1" className="h-full min-h-[200px] w-full" />,
+  <StepEstrategia key="2" className="h-full min-h-[200px] w-full" />,
+  <StepEjecucion key="3" className="h-full min-h-[200px] w-full" />,
+  <StepResultados key="4" className="h-full min-h-[200px] w-full" />,
+];
+
 export function ProcessSection() {
   const content = STEPS.map((step, i) => ({
     title: step.title,
     description: step.description,
     content: (
-      <div className="flex h-full items-center justify-center p-6">
-        <span className="flex size-24 items-center justify-center rounded-full border border-white/20 bg-white/5 text-3xl font-semibold text-white">
-          {i + 1}
-        </span>
+      <div className="flex h-full w-full items-stretch justify-center p-2">
+        {STEP_VISUALS[i]}
       </div>
     ),
   }));
