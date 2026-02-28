@@ -9,7 +9,6 @@ import { ensureTitleMax } from "@/lib/seo-metadata";
 import { getReadingTimeMinutes, getTableOfContents, getWordCount } from "@/lib/blog-utils";
 import { BlogPostCta } from "@/components/BlogPostCta";
 import { BlogPostFaq } from "@/components/BlogPostFaq";
-import { BlogCurvedLine } from "@/components/BlogCurvedLine";
 import { BlogPostSidebar } from "@/components/BlogPostSidebar";
 import { TracingBeam } from "@/components/ui/tracing-beam";
 
@@ -193,8 +192,6 @@ export default async function BlogPostPage({ params }: PageProps) {
                   {post.content}
                 </ReactMarkdown>
               </div>
-
-              <BlogCurvedLine />
 
               {post.faqs && post.faqs.length > 0 && (
                 <BlogPostFaq faqs={post.faqs} />
