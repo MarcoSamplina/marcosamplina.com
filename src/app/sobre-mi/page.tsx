@@ -1,7 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { Timeline } from "@/components/ui/timeline";
 import type { TimelineEntry } from "@/components/ui/timeline";
+
+const SITE_URL = "https://marcosamplina.com";
 
 const TIMELINE_DATA: TimelineEntry[] = [
   {
@@ -56,13 +59,41 @@ const TIMELINE_DATA: TimelineEntry[] = [
   },
 ];
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "@id": `${SITE_URL}/sobre-mi#breadcrumb`,
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: SITE_URL },
+    { "@type": "ListItem", position: 2, name: "Sobre mí", item: `${SITE_URL}/sobre-mi` },
+  ],
+};
+
 export default function SobreMiPage() {
   return (
-    <section className="relative z-10 min-h-screen px-4 pt-6 pb-20" aria-label="Sobre mí">
-      <div className="mx-auto max-w-4xl">
-        <h1 className="mb-4 text-3xl font-semibold text-white md:text-4xl">
-          Sobre mí
-        </h1>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <section className="relative z-10 min-h-screen px-4 pt-6 pb-20" aria-label="Sobre mí">
+        <div className="mx-auto max-w-4xl">
+          <nav aria-label="Breadcrumb" className="mb-8">
+            <ol className="flex items-center gap-2 text-sm text-zinc-500">
+              <li>
+                <Link href="/" className="transition-colors hover:text-white">
+                  Inicio
+                </Link>
+              </li>
+              <li aria-hidden>/</li>
+              <li className="text-white" aria-current="page">
+                Sobre mí
+              </li>
+            </ol>
+          </nav>
+          <h1 className="mb-4 text-3xl font-semibold text-white md:text-4xl">
+            Sobre mí
+          </h1>
         <p className="mb-12 max-w-2xl text-zinc-400 text-sm md:text-base leading-relaxed">
           De Perú a Valencia: formación en marketing y data, experiencia en agencia, industria y startups, y ahora enfocado en SEO y growth.
         </p>
@@ -75,5 +106,6 @@ export default function SobreMiPage() {
         />
       </div>
     </section>
+    </>
   );
 }

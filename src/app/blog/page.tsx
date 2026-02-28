@@ -26,15 +26,43 @@ export const metadata = {
 export default function BlogPage() {
   const posts = getPosts();
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${SITE_URL}/blog#breadcrumb`,
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Inicio", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE_URL}/blog` },
+    ],
+  };
+
   return (
-    <section
-      className="relative z-10 min-h-screen px-6 py-16 sm:py-20"
-      aria-label="Blog"
-    >
-      <div className="mx-auto max-w-5xl">
-        <h1 className="mb-4 text-3xl font-semibold text-white sm:text-4xl">
-          Blog
-        </h1>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <section
+        className="relative z-10 min-h-screen px-6 py-16 sm:py-20"
+        aria-label="Blog"
+      >
+        <div className="mx-auto max-w-5xl">
+          <nav aria-label="Breadcrumb" className="mb-8">
+            <ol className="flex items-center gap-2 text-sm text-zinc-500">
+              <li>
+                <Link href="/" className="transition-colors hover:text-white">
+                  Inicio
+                </Link>
+              </li>
+              <li aria-hidden>/</li>
+              <li className="text-white" aria-current="page">
+                Blog
+              </li>
+            </ol>
+          </nav>
+          <h1 className="mb-4 text-3xl font-semibold text-white sm:text-4xl">
+            Blog
+          </h1>
         <p className="mb-12 max-w-xl text-zinc-400 text-sm md:text-base">
           Guías, reflexiones y novedades sobre marketing digital, SEO y
           herramientas.
@@ -94,5 +122,6 @@ export default function BlogPage() {
         )}
       </div>
     </section>
+    </>
   );
 }

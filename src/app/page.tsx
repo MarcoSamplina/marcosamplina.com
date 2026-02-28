@@ -305,20 +305,20 @@ export default function HomePage() {
         <div className="mx-auto max-w-4xl">
           <motion.h2
             variants={fadeUp}
-            className="mb-4 text-center text-2xl font-semibold text-white sm:text-3xl"
+            className="mb-3 text-center text-2xl font-semibold text-white sm:text-3xl"
           >
-            Recursos
+            Guías, blog y herramientas
           </motion.h2>
           <motion.p
             variants={fadeUp}
             className="mb-10 text-center text-zinc-400 text-sm sm:text-base max-w-xl mx-auto"
           >
-            Guías, artículos y herramientas que puedes usar sin compromiso.
+            Contenido y utilidades para seguir aprendiendo y ejecutando sin depender de nadie.
           </motion.p>
-          <motion.div variants={fadeUp} className="flex justify-center">
+          <motion.div variants={fadeUp} className="w-full flex justify-center">
             <HoverEffect
               titleAs="h3"
-              className="inline-grid grid-cols-1 sm:grid-cols-2 py-0 gap-6 max-w-2xl place-content-center"
+              className="grid grid-cols-1 sm:grid-cols-2 py-0 gap-6 w-full max-w-2xl"
               items={[
                 {
                   title: "Blog",
