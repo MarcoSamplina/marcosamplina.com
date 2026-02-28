@@ -207,10 +207,16 @@ export default function HomePage() {
         <div className="mx-auto max-w-4xl">
           <motion.h2
             variants={fadeUp}
-            className="mb-12 text-center text-2xl font-semibold text-white sm:text-3xl"
+            className="mb-3 text-center text-2xl font-semibold text-white sm:text-3xl"
           >
-            Qué hago
+            Cómo te ayudo a crecer
           </motion.h2>
+          <motion.p
+            variants={fadeUp}
+            className="mb-10 text-center text-zinc-400 text-sm sm:text-base max-w-xl mx-auto"
+          >
+            SEO, campañas de pago, automatización y estrategia. Todo con métricas claras y sin humo.
+          </motion.p>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {SERVICIOS.map(({ icon: Icon, title, description }) => (
               <motion.article
@@ -315,11 +321,12 @@ export default function HomePage() {
           >
             Contenido y utilidades para seguir aprendiendo y ejecutando sin depender de nadie.
           </motion.p>
-          <motion.div variants={fadeUp} className="w-full flex justify-center">
-            <HoverEffect
-              titleAs="h3"
-              className="grid grid-cols-1 sm:grid-cols-2 py-0 gap-6 w-full max-w-2xl"
-              items={[
+          <motion.div variants={fadeUp} className="flex justify-center">
+            <div className="w-full max-w-2xl mx-auto">
+              <HoverEffect
+                titleAs="h3"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 py-0 gap-6 w-full"
+                items={[
                 {
                   title: "Blog",
                   description:
@@ -333,7 +340,8 @@ export default function HomePage() {
                   link: TOOLS_URL,
                 },
               ]}
-            />
+              />
+            </div>
           </motion.div>
         </div>
       </motion.section>
