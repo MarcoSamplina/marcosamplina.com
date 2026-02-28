@@ -7,7 +7,7 @@ published: true
 metaTitle: "Cómo aparecer en resultados de IA: guía GEO y AEO 2026"
 metaDescription: "Aprende a posicionar tu contenido en respuestas de IA: qué es GEO/AEO, cómo te eligen las IAs, estructura extractable y señales de autoridad. Guía práctica."
 cta: true
-image: "https://hpgodeemiqtbixwnzzvd.supabase.co/storage/v1/object/public/media/general/1771976608899-boliviainteligente-kECRXz0m42A-unsplash.webp"
+image: "https://hpgodeemiqtbixwnzzvd.supabase.co/storage/v1/object/public/media/general/1772244475790-myriam-jessier-VHXiGXxwOQ4-unsplash.webp"
 imageAlt: "Representación visual de inteligencia artificial y búsqueda: cerebro, datos y conexiones. Aparecer en resultados de IA."
 faqs:
   - question: "¿Qué es GEO y AEO?"

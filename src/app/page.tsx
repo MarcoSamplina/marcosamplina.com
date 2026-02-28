@@ -195,26 +195,6 @@ export default function HomePage() {
         </motion.div>
       </motion.section>
 
-      {/* Trust strip: señales rápidas (best practice landing) */}
-      <motion.section
-        className="relative z-10 px-6 py-8 [content-visibility:auto] [contain-intrinsic-size:auto_80px]"
-        aria-label="Confianza y recursos"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-40px" }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="mx-auto max-w-3xl">
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-center">
-            <span className="text-zinc-500 text-sm">Sesión de consultoría sin compromiso</span>
-            <span className="text-zinc-600" aria-hidden>·</span>
-            <span className="text-zinc-500 text-sm">Herramientas SEO gratuitas</span>
-            <span className="text-zinc-600" aria-hidden>·</span>
-            <span className="text-zinc-500 text-sm">Guías y blog actualizado</span>
-          </div>
-        </div>
-      </motion.section>
-
       {/* Servicios — grid uniforme; content-visibility para Core Web Vitals */}
       <motion.section
         className="relative z-10 px-6 py-16 sm:py-20 [content-visibility:auto] [contain-intrinsic-size:auto_600px]"
@@ -249,9 +229,9 @@ export default function HomePage() {
         </div>
       </motion.section>
 
-      {/* Flujo con sticky scroll — sección ocupa todo el viewport para que el efecto se vea completo */}
+      {/* Flujo con sticky scroll — altura según contenido para que todo quede en viewport hasta que el sticky finalice */}
       <motion.section
-        className="relative z-10 flex min-h-dvh flex-col justify-center px-6 py-16 sm:py-20 [content-visibility:auto] [contain-intrinsic-size:auto_400px]"
+        className="relative z-10 flex min-h-0 flex-col justify-center px-6 py-16 sm:py-20 [content-visibility:auto] [contain-intrinsic-size:auto_400px]"
         aria-label="Flujo de trabajo"
         initial="hidden"
         whileInView="show"
@@ -335,10 +315,10 @@ export default function HomePage() {
           >
             Guías, artículos y herramientas que puedes usar sin compromiso.
           </motion.p>
-          <motion.div variants={fadeUp}>
+          <motion.div variants={fadeUp} className="flex justify-center">
             <HoverEffect
               titleAs="h3"
-              className="grid-cols-1 sm:grid-cols-2 py-0 gap-6"
+              className="grid-cols-1 sm:grid-cols-2 py-0 gap-6 w-full max-w-2xl"
               items={[
                 {
                   title: "Blog",

@@ -15,7 +15,8 @@ import { TracingBeam } from "@/components/ui/tracing-beam";
 const SITE_URL = "https://marcosamplina.com";
 const LINKEDIN_URL = "https://www.linkedin.com/in/marco-samplina-cordova";
 const AUTHOR_IMAGE_URL =
-  "https://hpgodeemiqtbixwnzzvd.supabase.co/storage/v1/object/public/media/general/1771457705483-marco_linkedin.webp";
+  "https://hpgodeemiqtbixwnzzvd.supabase.co/storage/v1/object/public/media/general/1772244328160-marco_samplina.webp";
+const AUTHOR_IMAGE_ALT = "Marco Samplina";
 
 /** URLs del autor para schema sameAs (entidad y autoridad) */
 const AUTHOR_SAME_AS = [
@@ -176,7 +177,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                   >
                     <Image
                       src={AUTHOR_IMAGE_URL}
-                      alt={post.author || "Marco Samplina"}
+                      alt={post.author ? `${post.author}, autor del artículo` : AUTHOR_IMAGE_ALT}
                       width={40}
                       height={40}
                       className="size-10 rounded-full object-cover border border-white/10"

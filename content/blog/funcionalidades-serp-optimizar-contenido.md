@@ -7,7 +7,7 @@ published: true
 metaTitle: "Funcionalidades SERP 2026: snippets, PAA y resultados"
 metaDescription: "Aprende qué son las funcionalidades SERP, cómo aparecer en featured snippets, People Also Ask y otros formatos. Estructura extractable y prácticas para SERP e IA."
 cta: true
-image: "https://hpgodeemiqtbixwnzzvd.supabase.co/storage/v1/object/public/media/general/1771976608899-boliviainteligente-kECRXz0m42A-unsplash.webp"
+image: "https://hpgodeemiqtbixwnzzvd.supabase.co/storage/v1/object/public/media/general/1772244443318-firmbee-com-eMemmpUojlw-unsplash.webp"
 imageAlt: "Pantalla con búsqueda y resultados: optimizar contenido para funcionalidades SERP y resultados enriquecidos."
 faqs:
   - question: "¿Qué son las funcionalidades SERP?"
