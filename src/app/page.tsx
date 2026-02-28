@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, useReducedMotion, MotionConfig } from "motion/react";
 import { Linkedin, Calendar, Globe, Wrench, Search, Megaphone, Zap, Target, ChevronDown } from "lucide-react";
+import { LogoLoop } from "@/components/ui/LogoLoop";
 import { Spotlight } from "@/components/ui/spotlight";
 
 import { ProcessSection } from "@/components/ProcessSection";
@@ -84,6 +85,7 @@ const FAQS = [
 export default function HomePage() {
   const [faqOpenIndex, setFaqOpenIndex] = useState<number | null>(null);
   const shouldReduceMotion = useReducedMotion();
+  const flujoSectionRef = useRef<HTMLElement>(null);
 
   return (
     <MotionConfig reducedMotion={shouldReduceMotion ? "user" : "always"}>
@@ -195,6 +197,32 @@ export default function HomePage() {
         </motion.div>
       </motion.section>
 
+      {/* Logo loop — debajo del hero, fuera del viewport del hero */}
+      <section
+        className="relative z-10 py-8 overflow-hidden border-y border-white/5"
+        aria-label="Áreas de trabajo"
+      >
+        <div className="h-16 w-full" style={{ minHeight: "4rem" }}>
+          <LogoLoop
+            logos={[
+              { node: <Search className="size-8 text-zinc-400" />, title: "SEO", href: "/blog" },
+              { node: <Megaphone className="size-8 text-zinc-400" />, title: "SEM", href: "/blog" },
+              { node: <Zap className="size-8 text-zinc-400" />, title: "Automatización", href: "/blog" },
+              { node: <Target className="size-8 text-zinc-400" />, title: "Estrategia", href: "/blog" },
+            ]}
+            speed={80}
+            direction="left"
+            logoHeight={40}
+            gap={48}
+            hoverSpeed={0}
+            scaleOnHover
+            fadeOut
+            fadeOutColor="rgb(9 9 11)"
+            ariaLabel="Áreas de trabajo: SEO, SEM, automatización, estrategia"
+          />
+        </div>
+      </section>
+
       {/* Servicios — grid uniforme; content-visibility para Core Web Vitals */}
       <motion.section
         className="relative z-10 px-6 py-16 sm:py-20 [content-visibility:auto] [contain-intrinsic-size:auto_600px]"
@@ -235,8 +263,9 @@ export default function HomePage() {
         </div>
       </motion.section>
 
-      {/* Flujo con sticky scroll — altura según contenido para que todo quede en viewport hasta que el sticky finalice */}
+      {/* Flujo con sticky scroll — target = section para que el efecto empiece con el h2 y toda la section quede en viewport hasta que acabe */}
       <motion.section
+        ref={flujoSectionRef}
         className="relative z-10 flex min-h-0 flex-col justify-center px-6 py-16 sm:py-20 [content-visibility:auto] [contain-intrinsic-size:auto_400px]"
         aria-label="Flujo de trabajo"
         initial="hidden"
@@ -258,7 +287,7 @@ export default function HomePage() {
             Objetivos claros, plan de acción y ejecución medible. Así conectamos tu situación actual con los resultados que buscas, sin pasos de más.
           </motion.p>
           <motion.div variants={fadeUp}>
-            <ProcessSection />
+            <ProcessSection sectionRef={flujoSectionRef} />
           </motion.div>
         </div>
       </motion.section>

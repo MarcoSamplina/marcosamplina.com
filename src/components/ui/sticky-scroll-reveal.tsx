@@ -11,6 +11,7 @@ export const StickyScroll = ({
   contentClassName,
   className,
   variant = "default",
+  targetRef,
 }: {
   content: {
     title: string;
@@ -20,12 +21,15 @@ export const StickyScroll = ({
   contentClassName?: string;
   className?: string;
   variant?: StickyScrollVariant;
+  /** Si se pasa, el scroll se mide respecto a este elemento (ej. la section), no al cuadrante. Así toda la section está en viewport hasta que acaba el efecto. */
+  targetRef?: React.RefObject<HTMLElement | null>;
 }) => {
   const [activeCard, setActiveCard] = React.useState(0);
   const ref = useRef<HTMLDivElement>(null);
-  /** Scroll de la página respecto a esta sección: el panel se actualiza al pasar por la sección, sin depender del hover. */
+  const scrollTarget = targetRef ?? ref;
+  /** Scroll respecto al target (section o cuadrante): el panel se actualiza al pasar por la sección. */
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: scrollTarget,
     offset: ["start start", "end start"],
   });
   const cardLength = content.length;

@@ -1,5 +1,6 @@
 "use client";
 
+import type { RefObject } from "react";
 import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
 import { StepObjetivos, StepEstrategia, StepEjecucion, StepResultados } from "@/components/ProcessStepVisuals";
 
@@ -33,6 +34,8 @@ export function ProcessSection() {
       variant="minimal"
       content={content}
       className="max-w-4xl mx-auto"
+      contentClassName="lg:!top-24"
+      targetRef={sectionRef ?? undefined}
     />
   );
 }
