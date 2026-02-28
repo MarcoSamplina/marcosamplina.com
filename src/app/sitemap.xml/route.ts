@@ -2,6 +2,8 @@ import { getPosts } from "@/lib/blog";
 
 const BASE_URL = "https://marcosamplina.com";
 
+/** Sin trailing slash: consistente con canonicals y @id del sitio */
+
 function escapeXml(s: string): string {
   return s
     .replace(/&/g, "&amp;")

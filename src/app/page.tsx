@@ -1,18 +1,14 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useState } from "react";
 import { motion, useReducedMotion, MotionConfig } from "motion/react";
-import { Linkedin, Calendar, Globe, Wrench, Search, Megaphone, Zap, Target, ChevronDown, BookOpen } from "lucide-react";
+import { Linkedin, Calendar, Globe, Wrench, Search, Megaphone, Zap, Target, ChevronDown } from "lucide-react";
 import { Spotlight } from "@/components/ui/spotlight";
 
 import { ProcessSection } from "@/components/ProcessSection";
+import { HoverEffect } from "@/components/ui/card-hover-effect";
+import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { openCalendlyPopup, preloadCalendly } from "@/lib/calendly";
-
-const StarBorder = dynamic(
-  () => import("@/components/StarBorder.jsx").then((m) => m.default),
-  { ssr: false }
-);
 
 const TOOLS_URL = "https://tools.marcosamplina.com";
 const FRAMER_URL = "https://marco-samplina.framer.website/";
@@ -128,24 +124,22 @@ export default function HomePage() {
           Growth marketing con foco en resultados: SEO, paid y estrategia. Herramientas gratis y sesión de 30 min sin compromiso.
         </motion.p>
 
-        {/* CTA principal — StarBorder color plata premium */}
+        {/* CTA principal — hover border gradient */}
         <motion.div
           variants={fadeUp}
           transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="mb-14"
         >
-          <StarBorder
+          <HoverBorderGradient
             as="a"
             href={CALENDLY_URL}
             onClick={openCalendlyPopup}
             onMouseEnter={preloadCalendly}
-            color="#d4d4d4"
-            speed="8s"
-            thickness={1}
-            className="cta-premium"
+            containerClassName="bg-white/5 dark:bg-white/10 border-white/20"
+            className="bg-zinc-900/80 px-8 py-3.5 text-sm font-medium text-white rounded-full"
           >
             Boost your marketing
-          </StarBorder>
+          </HoverBorderGradient>
         </motion.div>
 
         {/* Logos con links — entrada escalonada por icono */}
@@ -341,40 +335,25 @@ export default function HomePage() {
           >
             Guías, artículos y herramientas que puedes usar sin compromiso.
           </motion.p>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            <motion.a
-              href="/blog"
-              variants={fadeUp}
-              className="group flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-colors hover:border-white/20 hover:bg-white/[0.08]"
-            >
-              <span className="flex size-12 items-center justify-center rounded-xl border border-white/20 bg-white/5 text-white transition-colors group-hover:bg-white/10">
-                <BookOpen className="size-6" />
-              </span>
-              <div className="text-left">
-                <h3 className="mb-1.5 font-semibold text-white">Blog</h3>
-                <p className="text-sm leading-relaxed text-zinc-400">
-                  Guías y artículos sobre SEO, paid, automatización y estrategia. Actualizado con enfoque 2026.
-                </p>
-              </div>
-            </motion.a>
-            <motion.a
-              href={TOOLS_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              variants={fadeUp}
-              className="group flex flex-col gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-colors hover:border-white/20 hover:bg-white/[0.08]"
-            >
-              <span className="flex size-12 items-center justify-center rounded-xl border border-white/20 bg-white/5 text-white transition-colors group-hover:bg-white/10">
-                <Wrench className="size-6" />
-              </span>
-              <div className="text-left">
-                <h3 className="mb-1.5 font-semibold text-white">Herramientas</h3>
-                <p className="text-sm leading-relaxed text-zinc-400">
-                  Herramientas SEO y de marketing gratuitas. Sin registro para la mayoría.
-                </p>
-              </div>
-            </motion.a>
-          </div>
+          <motion.div variants={fadeUp}>
+            <HoverEffect
+              className="grid-cols-1 sm:grid-cols-2 py-0 gap-6"
+              items={[
+                {
+                  title: "Blog",
+                  description:
+                    "Guías y artículos sobre SEO, paid, automatización y estrategia. Actualizado con enfoque 2026.",
+                  link: "/blog",
+                },
+                {
+                  title: "Herramientas",
+                  description:
+                    "Herramientas SEO y de marketing gratuitas. Sin registro para la mayoría.",
+                  link: TOOLS_URL,
+                },
+              ]}
+            />
+          </motion.div>
         </div>
       </motion.section>
 
@@ -464,18 +443,16 @@ export default function HomePage() {
             Una llamada de 30 minutos para revisar tu situación y objetivos. Sin compromiso.
           </motion.p>
           <motion.div variants={fadeUp}>
-            <StarBorder
+            <HoverBorderGradient
               as="a"
               href={CALENDLY_URL}
               onClick={openCalendlyPopup}
               onMouseEnter={preloadCalendly}
-              color="#d4d4d4"
-              speed="8s"
-              thickness={1}
-              className="cta-premium inline-block"
+              containerClassName="bg-white/5 dark:bg-white/10 border-white/20 inline-block"
+              className="bg-zinc-900/80 px-8 py-3.5 text-sm font-medium text-white rounded-full"
             >
               Reservar sesión gratis
-            </StarBorder>
+            </HoverBorderGradient>
           </motion.div>
         </div>
       </motion.section>

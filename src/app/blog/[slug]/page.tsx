@@ -11,6 +11,7 @@ import { BlogPostFaq } from "@/components/BlogPostFaq";
 import { BlogPostVisualBreak } from "@/components/BlogPostVisualBreak";
 import { BlogCurvedLine } from "@/components/BlogCurvedLine";
 import { BlogPostSidebar } from "@/components/BlogPostSidebar";
+import { TracingBeam } from "@/components/ui/tracing-beam";
 
 const SITE_URL = "https://marcosamplina.com";
 const LINKEDIN_URL = "https://www.linkedin.com/in/marco-samplina-cordova";
@@ -43,7 +44,7 @@ export async function generateMetadata({ params }: PageProps) {
   const description = post.metaDescription ?? post.description;
   const canonical = `${SITE_URL}/blog/${slug}`;
   return {
-    title,
+    title: { absolute: title },
     description,
     alternates: { canonical },
     openGraph: {
@@ -69,28 +70,16 @@ export default async function BlogPostPage({ params }: PageProps) {
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
+    "@id": `${postUrl}#article`,
     headline: post.title,
     description: post.description,
     datePublished: post.date,
     dateModified: post.dateModified ?? post.date,
     inLanguage: "es",
     wordCount,
-    author: {
-      "@type": "Person",
-      name: post.author || "Marco Samplina",
-      url: LINKEDIN_URL,
-      sameAs: AUTHOR_SAME_AS,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Marco Samplina",
-      url: SITE_URL,
-      logo: {
-        "@type": "ImageObject",
-        url: `${SITE_URL}/icon`,
-      },
-    },
-    mainEntityOfPage: { "@type": "WebPage", "@id": postUrl },
+    author: { "@id": "https://marcosamplina.com/#person" },
+    publisher: { "@id": "https://marcosamplina.com/#organization" },
+    mainEntityOfPage: { "@type": "WebPage", "@id": `${postUrl}#webpage` },
     url: postUrl,
     ...(post.image && {
       image: {
@@ -107,6 +96,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       ? {
           "@context": "https://schema.org",
           "@type": "FAQPage",
+          "@id": `${postUrl}#faq`,
           mainEntity: (post.faqs ?? []).map((f) => ({
             "@type": "Question",
             name: f.question,
@@ -211,16 +201,17 @@ export default async function BlogPostPage({ params }: PageProps) {
               )}
             </div>
 
-            {/* Columna derecha en flujo: un solo scroll de página, sin scroll propio */}
+            {/* Columna derecha: mismo patrón que StickyScroll (panel fijo al scroll). Tracing Beam + relacionados + CTA */}
             <aside
-              className="relative z-10 mt-12 lg:mt-0 lg:w-[280px] lg:shrink-0 lg:pl-6 lg:pr-2 lg:border-l lg:border-white/10"
-              aria-label="En esta entrada y recursos"
+              className="relative z-10 mt-12 lg:mt-0 lg:w-[280px] lg:shrink-0 lg:sticky lg:top-20 lg:self-start lg:pr-2"
+              aria-label="Entradas relacionadas y CTA"
             >
-              <BlogPostSidebar
-                relatedPosts={relatedPosts}
-                toc={toc}
-                showCta={!!post.cta}
-              />
+              <TracingBeam variant="sidebar" className="min-h-[200px]">
+                <BlogPostSidebar
+                  relatedPosts={relatedPosts}
+                  showCta={!!post.cta}
+                />
+              </TracingBeam>
             </aside>
           </div>
         </div>

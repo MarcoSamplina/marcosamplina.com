@@ -30,10 +30,10 @@ export const metadata: Metadata = {
     "Growth Marketing Specialist: SEO, SEM y automatización. Herramientas gratis, guías en el blog y sesión de consultoría de 30 min sin compromiso. Marco Samplina.",
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
       { url: "/icon", type: "image/png", sizes: "96x96" },
+      { url: "/favicon.ico", sizes: "any" },
     ],
-    shortcut: "/favicon.ico",
+    shortcut: "/icon",
   },
   keywords: [
     "growth marketing",
@@ -80,7 +80,14 @@ export default function RootLayout({
         name: "Marco Samplina",
         description:
           "Growth Marketing Specialist: SEO, SEM y automatización. Herramientas gratis, guías en el blog y sesión de consultoría de 30 min sin compromiso. Marco Samplina.",
-        publisher: { "@id": "https://marcosamplina.com/#person" },
+        publisher: { "@id": "https://marcosamplina.com/#organization" },
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://marcosamplina.com/#organization",
+        name: "Marco Samplina",
+        url: "https://marcosamplina.com",
+        logo: { "@type": "ImageObject", url: "https://marcosamplina.com/icon" },
       },
       {
         "@type": "Person",
@@ -103,8 +110,8 @@ export default function RootLayout({
     <html lang="es" className="dark" suppressHydrationWarning>
       <head>
         <meta name="google-site-verification" content="_-7kJm0ua9w444U_MniD8OpVL4uihggvedMinoT7vKU" />
-        <link rel="icon" href={`${SITE_URL}/favicon.ico`} sizes="any" />
-        <link rel="shortcut icon" href={`${SITE_URL}/favicon.ico`} />
+        <link rel="icon" href={`${SITE_URL}/icon`} type="image/png" sizes="96x96" />
+        <link rel="shortcut icon" href={`${SITE_URL}/icon`} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
