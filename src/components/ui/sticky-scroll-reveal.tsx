@@ -23,8 +23,9 @@ export const StickyScroll = ({
 }) => {
   const [activeCard, setActiveCard] = React.useState(0);
   const ref = useRef<HTMLDivElement>(null);
+  /** Scroll de la página respecto a esta sección: el panel se actualiza al pasar por la sección, sin depender del hover. */
   const { scrollYProgress } = useScroll({
-    container: ref,
+    target: ref,
     offset: ["start start", "end start"],
   });
   const cardLength = content.length;
@@ -75,7 +76,7 @@ export const StickyScroll = ({
             }
       }
       className={cn(
-        "relative flex h-[28rem] justify-center gap-8 overflow-y-auto rounded-2xl p-6 sm:p-8",
+        "relative flex min-h-[20rem] justify-center gap-8 rounded-2xl p-6 sm:p-8",
         !isMinimal && "rounded-md",
         isMinimal && "border border-white/10 bg-white/[0.02]",
         className

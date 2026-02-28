@@ -337,6 +337,7 @@ export default function HomePage() {
           </motion.p>
           <motion.div variants={fadeUp}>
             <HoverEffect
+              titleAs="h3"
               className="grid-cols-1 sm:grid-cols-2 py-0 gap-6"
               items={[
                 {

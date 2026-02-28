@@ -6,6 +6,7 @@ import { useState } from "react";
 export const HoverEffect = ({
   items,
   className,
+  titleAs = "h4",
 }: {
   items: {
     title: string;
@@ -13,6 +14,8 @@ export const HoverEffect = ({
     link: string;
   }[];
   className?: string;
+  /** Nivel de heading para el título de cada card (home Recursos: h3) */
+  titleAs?: "h3" | "h4";
 }) => {
   let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
@@ -53,7 +56,7 @@ export const HoverEffect = ({
             )}
           </AnimatePresence>
           <Card>
-            <CardTitle>{item.title}</CardTitle>
+            <CardTitle as={titleAs}>{item.title}</CardTitle>
             <CardDescription>{item.description}</CardDescription>
           </Card>
         </a>
@@ -86,14 +89,16 @@ export const Card = ({
 export const CardTitle = ({
   className,
   children,
+  as: Tag = "h4",
 }: {
   className?: string;
   children: React.ReactNode;
+  as?: "h3" | "h4";
 }) => {
   return (
-    <h4 className={cn("font-semibold tracking-wide mt-4 text-white", className)}>
+    <Tag className={cn("font-semibold tracking-wide mt-4 text-white", className)}>
       {children}
-    </h4>
+    </Tag>
   );
 };
 export const CardDescription = ({
