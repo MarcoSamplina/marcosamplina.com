@@ -18,7 +18,11 @@ const STEP_VISUALS = [
   <StepResultados key="4" className="h-full min-h-[200px] w-full" />,
 ];
 
-export function ProcessSection() {
+export function ProcessSection({
+  sectionRef,
+}: {
+  sectionRef?: RefObject<HTMLElement | null>;
+}) {
   const content = STEPS.map((step, i) => ({
     title: step.title,
     description: step.description,
