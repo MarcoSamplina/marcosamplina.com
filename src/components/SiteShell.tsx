@@ -6,7 +6,6 @@ import { useState, useCallback, useEffect } from "react";
 import { motion } from "motion/react";
 import { Linkedin, Calendar, Globe, Wrench, Menu, X } from "lucide-react";
 import { Logo } from "@/components/Logo";
-import { Menu as NavMenu, MenuItem } from "@/components/ui/navbar-menu";
 import { openCalendlyPopup, preloadCalendly } from "@/lib/calendly";
 
 const LightRays = dynamic(
@@ -25,7 +24,6 @@ const navLinkClass =
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [menuEverOpened, setMenuEverOpened] = useState(false);
-  const [activeNav, setActiveNav] = useState<string | null>(null);
   const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), []);
 
   const openMobileMenu = useCallback(() => {
@@ -86,73 +84,38 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       >
         <nav className="flex w-full max-w-4xl items-center justify-between gap-4 rounded-full border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-md sm:px-5">
           <Logo href="/" />
-          {/* Desktop: mismo diseño con efecto hover dropdown (navbar-menu) */}
-          <div className="hidden md:block flex-1 flex justify-end">
-            <NavMenu
-              setActive={setActiveNav}
-              className="relative flex w-max items-center justify-center gap-4 sm:gap-6"
+          {/* Links desktop: siempre visibles desde md */}
+          <div className="hidden items-center gap-4 md:flex md:gap-6">
+            <Link href="/sobre-mi" className={navLinkClass}>
+              Sobre mí
+            </Link>
+            <Link
+              href={TOOLS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={navLinkClass}
             >
-              <MenuItem
-                setActive={setActiveNav}
-                active={activeNav}
-                item="sobre-mi"
-                label="Sobre mí"
-                className={navLinkClass}
-              >
-                <Link href="/sobre-mi" className="block text-sm font-medium text-zinc-300 hover:text-white py-1">
-                  Ver mi trayectoria
-                </Link>
-              </MenuItem>
-              <MenuItem
-                setActive={setActiveNav}
-                active={activeNav}
-                item="herramientas"
-                label="Herramientas"
-                className={navLinkClass}
-              >
-                <Link href={TOOLS_URL} target="_blank" rel="noopener noreferrer" className="block text-sm font-medium text-zinc-300 hover:text-white py-1">
-                  Herramientas SEO gratis
-                </Link>
-              </MenuItem>
-              <MenuItem
-                setActive={setActiveNav}
-                active={activeNav}
-                item="portafolio"
-                label="Portafolio"
-                className={navLinkClass}
-              >
-                <Link href={FRAMER_URL} target="_blank" rel="noopener noreferrer" className="block text-sm font-medium text-zinc-300 hover:text-white py-1">
-                  Ver portafolio
-                </Link>
-              </MenuItem>
-              <MenuItem
-                setActive={setActiveNav}
-                active={activeNav}
-                item="blog"
-                label="Blog"
-                className={navLinkClass}
-              >
-                <Link href="/blog" className="block text-sm font-medium text-zinc-300 hover:text-white py-1">
-                  Guías y artículos
-                </Link>
-              </MenuItem>
-              <MenuItem
-                setActive={setActiveNav}
-                active={activeNav}
-                item="contacto"
-                label="Contacto"
-                className={navLinkClass}
-              >
-                <a
-                  href={CALENDLY_URL}
-                  onClick={openCalendlyPopup}
-                  onMouseEnter={preloadCalendly}
-                  className="block text-sm font-medium text-zinc-300 hover:text-white py-1"
-                >
-                  Reservar sesión
-                </a>
-              </MenuItem>
-            </NavMenu>
+              Herramientas
+            </Link>
+            <Link
+              href={FRAMER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={navLinkClass}
+            >
+              Portafolio
+            </Link>
+            <Link href="/blog" className={navLinkClass}>
+              Blog
+            </Link>
+            <a
+              href={CALENDLY_URL}
+              onClick={openCalendlyPopup}
+              onMouseEnter={preloadCalendly}
+              className={navLinkClass}
+            >
+              Contacto
+            </a>
           </div>
           {/* Botón menú móvil */}
           <button

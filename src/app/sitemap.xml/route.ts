@@ -1,55 +1,28 @@
-import { getPosts } from "@/lib/blog";
+import { SITEMAP_BASE_URL, escapeXml, toIso } from "@/lib/sitemap-utils";
 
-const BASE_URL = "https://marcosamplina.com";
-
-/** Sin trailing slash: consistente con canonicals y @id del sitio */
-
-function escapeXml(s: string): string {
-  return s
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;");
-}
-
-function toIso(date: Date): string {
-  return date.toISOString().slice(0, 19) + "Z";
-}
-
+/**
+ * Sitemap index (estilo Yoast): lista sitemaps de páginas y de posts.
+ * Google y otros crawlers siguen los enlaces a sitemap-pages.xml y sitemap-posts.xml.
+ */
 export async function GET() {
-  const posts = getPosts();
   const now = new Date();
-
-  const staticUrls: Array<{ loc: string; lastmod: Date; changefreq: string; priority: string }> = [
-    { loc: BASE_URL, lastmod: now, changefreq: "weekly", priority: "1" },
-    { loc: `${BASE_URL}/blog`, lastmod: now, changefreq: "weekly", priority: "0.9" },
-    { loc: `${BASE_URL}/sobre-mi`, lastmod: now, changefreq: "monthly", priority: "0.8" },
+  const sitemaps = [
+    { loc: `${SITEMAP_BASE_URL}/sitemap-pages.xml`, lastmod: now },
+    { loc: `${SITEMAP_BASE_URL}/sitemap-posts.xml`, lastmod: now },
   ];
 
-  const blogUrls = posts.map((p) => ({
-    loc: `${BASE_URL}/blog/${p.slug}`,
-    lastmod: p.dateModified ? new Date(p.dateModified) : new Date(p.date),
-    changefreq: "weekly",
-    priority: "0.8",
-  }));
-
-  const urls = [...staticUrls, ...blogUrls];
-
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="${BASE_URL}/sitemap.xsl"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls
+<?xml-stylesheet type="text/xsl" href="${SITEMAP_BASE_URL}/sitemap-index.xsl"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemaps
   .map(
-    (u) => `  <url>
-    <loc>${escapeXml(u.loc)}</loc>
-    <lastmod>${toIso(u.lastmod)}</lastmod>
-    <changefreq>${u.changefreq}</changefreq>
-    <priority>${u.priority}</priority>
-  </url>`
+    (s) => `  <sitemap>
+    <loc>${escapeXml(s.loc)}</loc>
+    <lastmod>${toIso(s.lastmod)}</lastmod>
+  </sitemap>`
   )
   .join("\n")}
-</urlset>`;
+</sitemapindex>`;
 
   return new Response(xml, {
     headers: {

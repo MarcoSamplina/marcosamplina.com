@@ -249,9 +249,9 @@ export default function HomePage() {
         </div>
       </motion.section>
 
-      {/* Flujo con Animated Beam — lazy loaded; content-visibility para CWV */}
+      {/* Flujo con sticky scroll — sección ocupa todo el viewport para que el efecto se vea completo */}
       <motion.section
-        className="relative z-10 px-6 py-16 sm:py-20 [content-visibility:auto] [contain-intrinsic-size:auto_400px]"
+        className="relative z-10 flex min-h-dvh flex-col justify-center px-6 py-16 sm:py-20 [content-visibility:auto] [contain-intrinsic-size:auto_400px]"
         aria-label="Flujo de trabajo"
         initial="hidden"
         whileInView="show"
