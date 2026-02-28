@@ -30,3 +30,20 @@ export const SEO_LIMITS = {
 } as const;
 
 export const SITE_NAME = "Marco Samplina";
+
+/**
+ * Asegura que el título no exceda el máximo de SERP (60 caracteres).
+ * Trunca en espacio si es posible y añade "…" para no superar maxChars.
+ * Blog: sin marca, solo tema/KW. Usar siempre para metaTitle de entradas.
+ */
+export function ensureTitleMax(
+  title: string,
+  maxChars: number = SEO_LIMITS.TITLE_MAX_CHARS
+): string {
+  const limit = Math.min(maxChars, 60);
+  if (title.length <= limit) return title;
+  const truncated = title.slice(0, limit - 1).trim();
+  const lastSpace = truncated.lastIndexOf(" ");
+  const out = lastSpace > limit * 0.6 ? truncated.slice(0, lastSpace) : truncated;
+  return out.length < truncated.length ? `${out}…` : `${out}…`;
+}

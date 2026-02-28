@@ -5,10 +5,10 @@ import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { getPostBySlug, getAllSlugs, getRelatedPosts } from "@/lib/blog";
+import { ensureTitleMax } from "@/lib/seo-metadata";
 import { getReadingTimeMinutes, getTableOfContents, getWordCount } from "@/lib/blog-utils";
 import { BlogPostCta } from "@/components/BlogPostCta";
 import { BlogPostFaq } from "@/components/BlogPostFaq";
-import { BlogPostVisualBreak } from "@/components/BlogPostVisualBreak";
 import { BlogCurvedLine } from "@/components/BlogCurvedLine";
 import { BlogPostSidebar } from "@/components/BlogPostSidebar";
 import { TracingBeam } from "@/components/ui/tracing-beam";
@@ -40,7 +40,8 @@ export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) return { title: "Entrada no encontrada" };
-  const title = post.metaTitle ?? post.title;
+  const rawTitle = post.metaTitle ?? post.title;
+  const title = ensureTitleMax(rawTitle);
   const description = post.metaDescription ?? post.description;
   const canonical = `${SITE_URL}/blog/${slug}`;
   return {
@@ -194,7 +195,6 @@ export default async function BlogPostPage({ params }: PageProps) {
               </div>
 
               <BlogCurvedLine />
-              <BlogPostVisualBreak />
 
               {post.faqs && post.faqs.length > 0 && (
                 <BlogPostFaq faqs={post.faqs} />

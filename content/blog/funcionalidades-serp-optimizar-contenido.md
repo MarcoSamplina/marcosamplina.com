@@ -1,10 +1,10 @@
 ---
-title: "Funcionalidades SERP: optimizar contenido para resultados enriquecidos"
+title: "Funcionalidades SERP: snippets, PAA y resultados enriquecidos"
 date: 2026-02-26
 description: "Guía práctica: featured snippets, PAA, knowledge panel, local pack y más. Estructura y técnicas para que tu contenido aparezca en las funcionalidades SERP y en IA."
 author: "Marco Samplina"
 published: true
-metaTitle: "Funcionalidades SERP 2026: snippets, PAA y resultados enriquecidos"
+metaTitle: "Funcionalidades SERP 2026: snippets, PAA y resultados"
 metaDescription: "Aprende qué son las funcionalidades SERP, cómo aparecer en featured snippets, People Also Ask y otros formatos. Estructura extractable y prácticas para SERP e IA."
 cta: true
 image: "https://hpgodeemiqtbixwnzzvd.supabase.co/storage/v1/object/public/media/general/1771976608899-boliviainteligente-kECRXz0m42A-unsplash.webp"

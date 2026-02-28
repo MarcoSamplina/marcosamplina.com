@@ -18,8 +18,8 @@ Resumen obligatorio:
 
 Antes de publicar contenido o cambiar títulos/descripciones, revisar el **checklist de 11 puntos** al final de `docs/GEO_IA_GUIDELINES.md`.
 
-**Límites con 5% margen (ver `src/lib/seo-metadata.ts`):** Título ≤57 caracteres (máx 60 en SERP). Meta description entre 143 y 168 caracteres. No superar estos valores en ningún post ni página.
+**Límites (ver `src/lib/seo-metadata.ts`):** Título **nunca más de 60 caracteres** (ideal ≤57). Meta description 143–168 caracteres. El código aplica `ensureTitleMax()` al metaTitle del blog para no superar 60.
 
-**Home:** El title por defecto debe incluir **| MASC** (iniciales). No acortar el title de la home sin incluir marca; Open Graph y Twitter deben coincidir.
+**Home:** El title por defecto debe incluir **| MASC**. Open Graph y Twitter deben coincidir.
 
-**Blog (entradas):** Los títulos de blog **no llevan marca** (ni | MASC ni | Marco Samplina). Revisar siempre la competencia para la keyword principal y alinear el título con el primer resultado (misma intención, formato similar). metaTitle en el frontmatter = título que se muestra en SERP, sin sufijo de marca.
+**Blog (entradas):** Títulos **perfectos**: (1) **≤60 caracteres** sin excepción; (2) **sin marca** (ni | MASC ni | Marco Samplina); (3) **solo el tema y la keyword** que atacamos. Revisar competencia para la KW principal y alinear con el primer resultado. metaTitle en frontmatter = título en SERP (sin sufijo de marca). Si se pasa de 60, `ensureTitleMax()` trunca en build.
